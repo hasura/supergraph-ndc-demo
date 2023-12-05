@@ -18,7 +18,7 @@ we're also going to use a federated schema to do it. This means that we can quer
 which exposes a subset of the overall schema. This is a powerful concept that allows us to build a single schema that
 represents our entire data model, but we can break it up into smaller pieces that are easier to manage and maintain.
 
-Below, we're going to query across three different data sources: DuckDB, Turso, and Qdrant. Each of these data sources
+Below, we're going to query across two different data sources: Turso, and Qdrant. Each of these data sources
 is represented by a subgraph, and can be owned by different teams. We will also use Hasura's example database in our default subgraph [here](https://v3-docs-eny.pages.dev/getting-started/local-dev/)
 
 ```graphql
