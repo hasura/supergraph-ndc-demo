@@ -1,15 +1,16 @@
-# Installation
+# Local Installation
 Clone this
 
 Fill out the .env with your details using .env.example as a template
+(You should only need to provide a github PAT for defaults)
 
-Run docker compose up
+Run `docker compose up`
 
-Navigate to http://localhost:8000/ for GraphiQL
+Navigate to `http://localhost:8000/` for GraphiQL via V3 engine
 
-Navigate to http://localhost:6333/ for Qdrant dashboard
+# Cloud Access
 
-## Overview
+There is a supergraph project currently hosted [here](https://console.hasura.io/project/glad-sturgeon-9850/graphql). This project includes an additional Neon database in the default namespace. Work is being done to add that to the local demo. All the same queries will run in both. To demo console, use the cloud project. To demo speed use the local one. 
 
 ## Supergraph query
 
@@ -19,7 +20,7 @@ which exposes a subset of the overall schema. This is a powerful concept that al
 represents our entire data model, but we can break it up into smaller pieces that are easier to manage and maintain.
 
 Below, we're going to query across two different data sources: Turso, and Qdrant. Each of these data sources
-is represented by a subgraph, and can be owned by different teams. We will also use Hasura's example database in our default subgraph [here](https://v3-docs-eny.pages.dev/getting-started/local-dev/)
+is represented by a subgraph, and can be owned by different teams.
 
 ```graphql
 query SuperGraph {
@@ -45,81 +46,10 @@ query SuperGraph {
 }
 ```
 
-## DuckDB - Not hosted locally
-
-DuckDB is a high-performance, analytical database that is designed to be embedded in applications.
-
-**You can use the DuckDB connector hosted here on Hasura DDN**:
-[https://connector-e26f2620-54e3-439e-b9b1-95f873c71f50-hyc5v23h6a-ue.a.run.app](https://connector-e26f2620-54e3-439e-b9b1-95f873c71f50-hyc5v23h6a-ue.a.run.app)
-
-### Features
-
-- Limit
-- Offset
-- Ordering
-- Where filtering
-  - AND
-  - OR
-  - NOT
-  - LIKE
-  - GLOB
-  - \>
-  - <
-  - \>=
-  - <=
-  - ==
-  - !=
-- Variables
-
-### Queries
-
-#### Example 1
-
-```graphql
-query HNDuckDB {
-  duckdbSampleDataHnHackerNews(limit: 10) {
-    id
-    text
-    time
-  }
-}
-```
-
-#### Example 2
-
-```graphql
-query FilteredHNNews {
-  duckdbSampleDataHnHackerNews(
-    limit: 10
-    where: { _and: [{ title: { _like: "%tech%" } }, { _not: { text: { _like: "%apple%" } } }] }
-  ) {
-    id
-    title
-    text
-    time
-  }
-}
-```
-
-#### Example 3
-
-```graphql
-query OrderedHNData($limitNum: Int = 5) {
-  duckdbSampleDataHnHackerNews(limit: $limitNum, order_by: { time: Desc }) {
-    id
-    title
-    text
-    time
-  }
-}
-```
-
-## Turso - Hosted Locally, very quick
+## Turso
 
 Turso is build on top of SQLite with boasted microsecond latency.
 
-**You can use the Turso connector hosted here on Hasura DDN**:
-[https://connector-de77cc89-c674-4606-bfe6-443fb20caeeb-hyc5v23h6a-ue.a.run.app](https://connector-de77cc89-c674-4606-bfe6-443fb20caeeb-hyc5v23h6a-ue.a.run.app)
 
 ### Features
 
@@ -173,11 +103,9 @@ query AlbumsWithTracks {
 }
 ```
 
-## Qdrant - Hosted Locally, very quick
+## Qdrant
 
 Qdrant is a vector search engine that allows you to search for similar vectors within embeddings.
-
-[https://connector-47629a21-7910-4def-ae48-9ea63f297ca4-hyc5v23h6a-ue.a.run.app](https://connector-47629a21-7910-4def-ae48-9ea63f297ca4-hyc5v23h6a-ue.a.run.app)
 
 ### Features:
 
@@ -254,9 +182,11 @@ query QdrantJoinTurso {
 }
 ```
 
-## Typescript Function Connector
+Sub-50ms remote database joins with docker-compose.
 
-[https://connector-6606e963-47c8-4257-8563-ddb8119467be-hyc5v23h6a-ue.a.run.app](https://connector-6606e963-47c8-4257-8563-ddb8119467be-hyc5v23h6a-ue.a.run.app)
+![Waterfall](images/waterfall.png)
+
+## Typescript Function Connector
 
 Functions:
 
@@ -301,3 +231,292 @@ Example Output:
   }
 }
 ```
+
+## DuckDB
+
+DuckDB is a high-performance, analytical database that is designed to be embedded in applications.
+
+**You can use the DuckDB connector hosted here on Hasura DDN**:
+[https://connector-e26f2620-54e3-439e-b9b1-95f873c71f50-hyc5v23h6a-ue.a.run.app](https://connector-e26f2620-54e3-439e-b9b1-95f873c71f50-hyc5v23h6a-ue.a.run.app)
+
+### Features
+
+- Limit
+- Offset
+- Ordering
+- Where filtering
+  - AND
+  - OR
+  - NOT
+  - LIKE
+  - GLOB
+  - \>
+  - <
+  - \>=
+  - <=
+  - ==
+  - !=
+- Variables
+
+### Queries
+
+#### Example 1
+
+```graphql
+query HNDuckDB {
+  duckdbSampleDataHnHackerNews(limit: 10) {
+    id
+    text
+    time
+  }
+}
+```
+
+#### Example 2
+
+```graphql
+query FilteredHNNews {
+  duckdbSampleDataHnHackerNews(
+    limit: 10
+    where: { _and: [{ title: { _like: "%tech%" } }, { _not: { text: { _like: "%apple%" } } }] }
+  ) {
+    id
+    title
+    text
+    time
+  }
+}
+```
+
+#### Example 3
+
+```graphql
+query OrderedHNData($limitNum: Int = 5) {
+  duckdbSampleDataHnHackerNews(limit: $limitNum, order_by: { time: Desc }) {
+    id
+    title
+    text
+    time
+  }
+}
+```
+
+# What containers are there?
+
+### auth
+
+`docker-compose.yaml`
+```yaml
+services:
+  auth:
+    ports:
+      - "3050:3050"
+    build: ./auth
+```
+
+The auth service is a dev service that passes through any requests, and if the role is missing it sets it to admin.
+
+### engine
+`docker-compose.yaml`
+```yaml
+services:
+  engine:
+    build:
+      context: ./engine
+      dockerfile: Dockerfile
+      args:
+        GITHUB_PAT: ${GITHUB_PAT}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ${ENGINE_METADATA_PATH}:/engine_metadata.json
+      - ${ENGINE_AUTH_PATH}:/auth_config.json
+    environment:
+      - HASURA_GRAPHQL_CORS_DOMAIN=http://localhost:3000
+    command: ["cargo", "run", "--release", "--bin", "engine", "--", "--port", "8000", "--metadata-path", "/engine_metadata.json", "--authn-config-path", "/auth_config.json"]
+    restart: always
+    depends_on:
+      - auth
+```
+
+The engine service clones the v3 engine using the provided github pat and runs it, passing the auth-config and the engine_metadata
+
+Navigate to `http://localhost:8000/` for GraphiQL via V3 engine
+
+![Engine](images/engine.png)
+
+
+### qdrant_database
+
+`docker-compose.yaml`
+```yaml
+services:
+  qdrant_database:
+    image: qdrant/qdrant
+    ports:
+      - "6333:6333"
+    restart: always
+```
+
+This runs the [qdrant](https://qdrant.tech/) database image on port `6333`.
+
+When running you can navigate to `http://localhost:6333/dashboard` for Qdrant dashboard
+
+The dashboard provides a firebase-esque experience for viewing your Qdrant database. 
+
+![Qdrant Collection Snapshot](images/qdrant_collection.png)
+
+You can also view the data-points that you have uploaded.
+![Qdrant Album](images/qdrant_album.png)
+
+You can download/upload snapshots to Qdrant. The `snapshot-uploader` service utilizes this in order to download snapshots from a public S3 bucket (currently hosted in Europe) to load the database when started for the first time. Subsequent starts will use the cached snapshots to reset the database to it's initial/default state.
+
+![Qdrant Snapshot Dashboard](images/qdrant_snapshot.png)
+
+### snapshot-uploader
+
+`docker-compose.yaml`
+```yaml
+services:
+  snapshot-uploader:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+    volumes:
+      - snapshot-data:/app/snapshots
+    depends_on:
+      - qdrant_database
+```
+
+This downloads a series of snapshots from an S3 bucket and uploads it to Qdrant. For more details please see the `worker` directory.
+
+### qdrant
+
+`docker-compose.yaml`
+```yaml
+services:
+  qdrant:
+    build: ./connector-qdrant
+    ports:
+      - "8102:8102"
+    volumes:
+      - ${QDRANT_METADATA}:/etc/connector/config.json
+```
+
+This uses the Dockerfile located at `connector-qdrant/Dockerfile` to clone and run an instance of the [qdrant connector](https://github.com/hasura/ndc-qdrant).
+
+Altering the `QDRANT_METADATA` variable in the `.env` file allows you to specify the location of the metadata file.
+
+The Qdrant connector is hosted on: `http://localhost:8102`
+
+You can use the LSP to generate the metadata for the Qdrant connector by creating a `.hml` file that contains:
+
+`metadata.hml`
+```yaml
+kind: DataConnector
+version: v1
+definition:
+  name: qdrant_connector
+  url:
+    singleUrl: http://localhost:8102
+```
+ 
+The Qdrant connector is hosted on: `https://connector-47629a21-7910-4def-ae48-9ea63f297ca4-hyc5v23h6a-ue.a.run.app` as well, and pointing the singleUrl at that will allow you to connect to the hosted instance instead of the local.
+
+### turso
+
+`docker-compose.yaml`
+```yaml
+services:
+  turso:
+    build: ./connector-turso
+    ports:
+      - "8101:8101"
+    volumes:
+      - ${TURSO_METADATA}:/etc/connector/config.json
+      - ${TURSO_DATABASE}:/usr/src/app/database.sqlite
+```
+
+This uses the Dockerfile located at `connector-turso/Dockerfile` to clone and run an instance of the [turso connector](https://github.com/hasura/ndc-turso).
+
+Altering the `TURSO_METADATA` variable in the `.env` file allows you to specify the location of the metadata file.
+
+Altering the `TURSO_DATABASE` variable in the `.env` file allows you to specify a file so you can ship the database with the connector.
+
+The Turso connector is hosted on: `http://localhost:8101`
+
+You can use the LSP to generate the metadata for the Turso connector by creating a `.hml` file that contains:
+
+`metadata.hml`
+```yaml
+kind: DataConnector
+version: v1
+definition:
+  name: turso_connector
+  url:
+    singleUrl: http://localhost:8101
+```
+
+Then using Refresh + Track All via the VSCode extension
+ 
+The Turso connector is hosted on: `https://connector-de77cc89-c674-4606-bfe6-443fb20caeeb-hyc5v23h6a-ue.a.run.app` as well, and pointing the singleUrl at that will allow you to connect to the hosted instance instead of the local.
+
+### functions
+
+`docker-compose.yaml`
+```
+services:
+  functions:
+    image: ghcr.io/hasura/ndc-typescript-deno:latest
+    volumes:
+      - ${FUNCTIONS_SRC}:/functions/src
+    ports:
+      - "8080:8080"
+```
+
+This uses the [typescript connector](https://github.com/hasura/ndc-sdk-typescript) to add functions onto the graph which can contain custom business logic.
+
+Altering the `FUNCTIONS_SRC` variable in the `.env` file allows you to specify the location of the functions.
+
+The functions connector is hosted on: `http://localhost:8080`
+
+You can use the LSP to generate the metadata for the functions connector by creating a `.hml` file that contains:
+
+`metadata.hml`
+```yaml
+kind: DataConnector
+version: v1
+definition:
+  name: turso_connector
+  url:
+    singleUrl: http://localhost:8080
+```
+
+Then using Refresh + Track All via the VSCode extension
+
+The Functions connector is hosted on: `https://connector-6606e963-47c8-4257-8563-ddb8119467be-hyc5v23h6a-ue.a.run.app` as well, and pointing the singleUrl at that will allow you to connect to the hosted instance instead of the local.
+
+## Generating engine metadata
+
+In the `ddn-metadata` directory you'll find a Hasura DDN metadata structure.
+
+In order to run the engine locally, you will need to convert the YAML into a unified JSON object.
+
+An example of the structure this object requires can be found in: `engine_metadata.json`
+
+There is a useful helper script located at `generate_config.py` that can be run with python. `python3 generate_config.py`
+This script will walk through each subgraph, and parse the `.hml` (via a `yaml` parser) collecting them as JSON objects.
+
+Upon completion this script will overwrite the file at: `engine/metadata.json`
+
+At the top of this script is a dictionary mapping the subgraph name to the localhost url. 
+
+```python
+SUBGRAPH_DOCKERS = {
+    "turso": "http://turso:8101",
+    "qdrant": "http://qdrant:8102",
+    "functions": "http://functions:8080"
+}
+```
+
+This can be (*optionally) used to redirect the cloud project to a locally hosted connector. The DuckDB connector is not hosted locally, but when running engine locally it just makes a remote call to the deployed duckdb connector. 

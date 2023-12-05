@@ -3,6 +3,13 @@ import os
 import logging
 import time
 
+# Change these to point to your own S3 bucket containing snapshots.
+# This points to a public S3 bucket that contains uploads of Qdrant Snapshots that can be generated in the Qdrant Dashboard.
+URL_PATTERN = "https://eu-west-hasura.s3.eu-west-3.amazonaws.com/{collection_name}.snapshot"
+# List of collections to process
+COLLECTIONS = ["Album", "article", "boolean", "image_recipe", "multimodal_recipe", "text_recipe"]
+
+
 def healthcheck():
     try:
         url = f"http://qdrant_database:6333/healthz"
@@ -52,20 +59,16 @@ def recover_from_snapshot_with_file(collection_name, file_path, wait=True, prior
 
 def construct_snapshot_url(collection_name):
     # Assuming a consistent URL pattern for all collections
-    return f"https://eu-west-hasura.s3.eu-west-3.amazonaws.com/{collection_name}.snapshot"
+    return URL_PATTERN.format(collection_name=collection_name)
 
 
-print("IN MAIN")
 if __name__ == "__main__":
     while healthcheck() != "healthz check passed":
         logging.info("Qdrant not healthy... sleeping")
         time.sleep(1)
 
-    # List of collections to process
-    collections = ["Album", "article", "boolean", "image_recipe", "multimodal_recipe", "text_recipe"]
-
     # Download and recover snapshots for each collection
-    for collection_name in collections:
+    for collection_name in COLLECTIONS:
         url = construct_snapshot_url(collection_name)
         local_filename = f"/app/snapshots/{collection_name}.snapshot"
         download_file(url, local_filename)
