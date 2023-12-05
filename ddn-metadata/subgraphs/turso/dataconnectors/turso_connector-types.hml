@@ -1,0 +1,28 @@
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: turso_connector
+  dataConnectorScalarType: Int
+  representation: Int
+  graphql:
+    comparisonExpressionTypeName: TursoTursoConnectorIntComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: turso_connector
+  dataConnectorScalarType: String
+  representation: String
+  graphql:
+    comparisonExpressionTypeName: TursoTursoConnectorStringComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: turso_connector
+  dataConnectorScalarType: Float
+  representation: Float
+  graphql:
+    comparisonExpressionTypeName: TursoTursoConnectorFloatComparisonExp

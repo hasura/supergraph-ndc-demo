@@ -1,0 +1,604 @@
+kind: DataConnector
+version: v1
+definition:
+  name: duckdb_connector
+  url:
+    singleUrl: 'https://connector-e26f2620-54e3-439e-b9b1-95f873c71f50-hyc5v23h6a-ue.a.run.app'
+  schema:
+    scalar_types:
+      Int:
+        aggregate_functions: {}
+        comparison_operators:
+          _gt:
+            argument_type:
+              type: named
+              name: Int
+          _lt:
+            argument_type:
+              type: named
+              name: Int
+          _gte:
+            argument_type:
+              type: named
+              name: Int
+          _lte:
+            argument_type:
+              type: named
+              name: Int
+          _neq:
+            argument_type:
+              type: named
+              name: Int
+        update_operators: {}
+      Float:
+        aggregate_functions: {}
+        comparison_operators:
+          _gt:
+            argument_type:
+              type: named
+              name: Float
+          _lt:
+            argument_type:
+              type: named
+              name: Float
+          _gte:
+            argument_type:
+              type: named
+              name: Float
+          _lte:
+            argument_type:
+              type: named
+              name: Float
+          _neq:
+            argument_type:
+              type: named
+              name: Float
+        update_operators: {}
+      String:
+        aggregate_functions: {}
+        comparison_operators:
+          _like:
+            argument_type:
+              type: named
+              name: String
+          _glob:
+            argument_type:
+              type: named
+              name: String
+          _gt:
+            argument_type:
+              type: named
+              name: String
+          _lt:
+            argument_type:
+              type: named
+              name: String
+          _gte:
+            argument_type:
+              type: named
+              name: String
+          _lte:
+            argument_type:
+              type: named
+              name: String
+          _neq:
+            argument_type:
+              type: named
+              name: String
+        update_operators: {}
+      Boolean:
+        aggregate_functions: {}
+        comparison_operators: {}
+        update_operators: {}
+    functions: []
+    procedures: []
+    object_types:
+      sample_data_hn_hacker_news:
+        fields:
+          title:
+            type:
+              name: String
+              type: named
+          url:
+            type:
+              name: String
+              type: named
+          text:
+            type:
+              name: String
+              type: named
+          dead:
+            type:
+              name: Boolean
+              type: named
+          by:
+            type:
+              name: String
+              type: named
+          score:
+            type:
+              name: Int
+              type: named
+          time:
+            type:
+              name: Int
+              type: named
+          timestamp:
+            type:
+              name: String
+              type: named
+          type:
+            type:
+              name: String
+              type: named
+          id:
+            type:
+              name: Int
+              type: named
+          parent:
+            type:
+              name: Int
+              type: named
+          descendants:
+            type:
+              name: Int
+              type: named
+          ranking:
+            type:
+              name: Int
+              type: named
+          deleted:
+            type:
+              name: Boolean
+              type: named
+      sample_data_nyc_rideshare:
+        fields:
+          hvfhs_license_num:
+            type:
+              name: String
+              type: named
+          dispatching_base_num:
+            type:
+              name: String
+              type: named
+          originating_base_num:
+            type:
+              name: String
+              type: named
+          request_datetime:
+            type:
+              name: String
+              type: named
+          on_scene_datetime:
+            type:
+              name: String
+              type: named
+          pickup_datetime:
+            type:
+              name: String
+              type: named
+          dropoff_datetime:
+            type:
+              name: String
+              type: named
+          PULocationID:
+            type:
+              name: Int
+              type: named
+          DOLocationID:
+            type:
+              name: Int
+              type: named
+          trip_miles:
+            type:
+              name: Float
+              type: named
+          trip_time:
+            type:
+              name: Int
+              type: named
+          base_passenger_fare:
+            type:
+              name: Float
+              type: named
+          tolls:
+            type:
+              name: Float
+              type: named
+          bcf:
+            type:
+              name: Float
+              type: named
+          sales_tax:
+            type:
+              name: Float
+              type: named
+          congestion_surcharge:
+            type:
+              name: Float
+              type: named
+          airport_fee:
+            type:
+              name: Float
+              type: named
+          tips:
+            type:
+              name: Float
+              type: named
+          driver_pay:
+            type:
+              name: Float
+              type: named
+          shared_request_flag:
+            type:
+              name: String
+              type: named
+          shared_match_flag:
+            type:
+              name: String
+              type: named
+          access_a_ride_flag:
+            type:
+              name: String
+              type: named
+          wav_request_flag:
+            type:
+              name: String
+              type: named
+          wav_match_flag:
+            type:
+              name: String
+              type: named
+      sample_data_nyc_service_requests:
+        fields:
+          unique_key:
+            type:
+              name: Int
+              type: named
+          created_date:
+            type:
+              name: String
+              type: named
+          closed_date:
+            type:
+              name: String
+              type: named
+          agency:
+            type:
+              name: String
+              type: named
+          agency_name:
+            type:
+              name: String
+              type: named
+          complaint_type:
+            type:
+              name: String
+              type: named
+          descriptor:
+            type:
+              name: String
+              type: named
+          location_type:
+            type:
+              name: String
+              type: named
+          incident_zip:
+            type:
+              name: String
+              type: named
+          incident_address:
+            type:
+              name: String
+              type: named
+          street_name:
+            type:
+              name: String
+              type: named
+          cross_street_1:
+            type:
+              name: String
+              type: named
+          cross_street_2:
+            type:
+              name: String
+              type: named
+          intersection_street_1:
+            type:
+              name: String
+              type: named
+          intersection_street_2:
+            type:
+              name: String
+              type: named
+          address_type:
+            type:
+              name: String
+              type: named
+          city:
+            type:
+              name: String
+              type: named
+          landmark:
+            type:
+              name: String
+              type: named
+          facility_type:
+            type:
+              name: String
+              type: named
+          status:
+            type:
+              name: String
+              type: named
+          due_date:
+            type:
+              name: String
+              type: named
+          resolution_description:
+            type:
+              name: String
+              type: named
+          resolution_action_updated_date:
+            type:
+              name: String
+              type: named
+          community_board:
+            type:
+              name: String
+              type: named
+          bbl:
+            type:
+              name: String
+              type: named
+          borough:
+            type:
+              name: String
+              type: named
+          x_coordinate_state_plane:
+            type:
+              name: String
+              type: named
+          y_coordinate_state_plane:
+            type:
+              name: String
+              type: named
+          open_data_channel_type:
+            type:
+              name: String
+              type: named
+          park_facility_name:
+            type:
+              name: String
+              type: named
+          park_borough:
+            type:
+              name: String
+              type: named
+          vehicle_type:
+            type:
+              name: String
+              type: named
+          taxi_company_borough:
+            type:
+              name: String
+              type: named
+          taxi_pick_up_location:
+            type:
+              name: String
+              type: named
+          bridge_highway_name:
+            type:
+              name: String
+              type: named
+          bridge_highway_direction:
+            type:
+              name: String
+              type: named
+          road_ramp:
+            type:
+              name: String
+              type: named
+          bridge_highway_segment:
+            type:
+              name: String
+              type: named
+          latitude:
+            type:
+              name: Float
+              type: named
+          longitude:
+            type:
+              name: Float
+              type: named
+      sample_data_nyc_taxi:
+        fields:
+          VendorID:
+            type:
+              name: Int
+              type: named
+          tpep_pickup_datetime:
+            type:
+              name: String
+              type: named
+          tpep_dropoff_datetime:
+            type:
+              name: String
+              type: named
+          passenger_count:
+            type:
+              name: Float
+              type: named
+          trip_distance:
+            type:
+              name: Float
+              type: named
+          RatecodeID:
+            type:
+              name: Float
+              type: named
+          store_and_fwd_flag:
+            type:
+              name: String
+              type: named
+          PULocationID:
+            type:
+              name: Int
+              type: named
+          DOLocationID:
+            type:
+              name: Int
+              type: named
+          payment_type:
+            type:
+              name: Int
+              type: named
+          fare_amount:
+            type:
+              name: Float
+              type: named
+          extra:
+            type:
+              name: Float
+              type: named
+          mta_tax:
+            type:
+              name: Float
+              type: named
+          tip_amount:
+            type:
+              name: Float
+              type: named
+          tolls_amount:
+            type:
+              name: Float
+              type: named
+          improvement_surcharge:
+            type:
+              name: Float
+              type: named
+          total_amount:
+            type:
+              name: Float
+              type: named
+          congestion_surcharge:
+            type:
+              name: Float
+              type: named
+          airport_fee:
+            type:
+              name: Float
+              type: named
+      sample_data_who_ambient_air_quality:
+        fields:
+          who_region:
+            type:
+              name: String
+              type: named
+          iso3:
+            type:
+              name: String
+              type: named
+          country_name:
+            type:
+              name: String
+              type: named
+          city:
+            type:
+              name: String
+              type: named
+          year:
+            type:
+              name: Int
+              type: named
+          version:
+            type:
+              name: String
+              type: named
+          pm10_concentration:
+            type:
+              name: Int
+              type: named
+          pm25_concentration:
+            type:
+              name: Int
+              type: named
+          no2_concentration:
+            type:
+              name: Int
+              type: named
+          pm10_tempcov:
+            type:
+              name: Int
+              type: named
+          pm25_tempcov:
+            type:
+              name: Int
+              type: named
+          no2_tempcov:
+            type:
+              name: Int
+              type: named
+          type_of_stations:
+            type:
+              name: String
+              type: named
+          reference:
+            type:
+              name: String
+              type: named
+          web_link:
+            type:
+              name: String
+              type: named
+          population:
+            type:
+              name: String
+              type: named
+          population_source:
+            type:
+              name: String
+              type: named
+          latitude:
+            type:
+              name: Float
+              type: named
+          longitude:
+            type:
+              name: Float
+              type: named
+          who_ms:
+            type:
+              name: Int
+              type: named
+    collections:
+      - name: sample_data_hn_hacker_news
+        arguments: {}
+        type: sample_data_hn_hacker_news
+        deletable: false
+        uniqueness_constraints: {}
+        foreign_keys: {}
+      - name: sample_data_nyc_rideshare
+        arguments: {}
+        type: sample_data_nyc_rideshare
+        deletable: false
+        uniqueness_constraints: {}
+        foreign_keys: {}
+      - name: sample_data_nyc_service_requests
+        arguments: {}
+        type: sample_data_nyc_service_requests
+        deletable: false
+        uniqueness_constraints: {}
+        foreign_keys: {}
+      - name: sample_data_nyc_taxi
+        arguments: {}
+        type: sample_data_nyc_taxi
+        deletable: false
+        uniqueness_constraints: {}
+        foreign_keys: {}
+      - name: sample_data_who_ambient_air_quality
+        arguments: {}
+        type: sample_data_who_ambient_air_quality
+        deletable: false
+        uniqueness_constraints: {}
+        foreign_keys: {}

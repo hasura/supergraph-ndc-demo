@@ -1,0 +1,22 @@
+kind: Command
+version: v1
+definition:
+  name: sync
+  outputType: Int!
+  arguments: []
+  source:
+    dataConnectorName: turso_connector
+    dataConnectorCommand:
+      procedure: sync
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: tursoSync
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: sync
+  permissions:
+    - role: admin
+      allowExecution: true

@@ -1,0 +1,648 @@
+kind: DataConnector
+version: v1
+definition:
+  name: qdrant_connector
+  url:
+    singleUrl: https://connector-47629a21-7910-4def-ae48-9ea63f297ca4-hyc5v23h6a-ue.a.run.app
+  schema:
+    scalar_types:
+      Int:
+        aggregate_functions: {}
+        comparison_operators:
+          gt:
+            argument_type:
+              type: named
+              name: Int
+          lt:
+            argument_type:
+              type: named
+              name: Int
+          gte:
+            argument_type:
+              type: named
+              name: Int
+          lte:
+            argument_type:
+              type: named
+              name: Int
+      Float:
+        aggregate_functions: {}
+        comparison_operators:
+          gt:
+            argument_type:
+              type: named
+              name: Float
+          lt:
+            argument_type:
+              type: named
+              name: Float
+          gte:
+            argument_type:
+              type: named
+              name: Float
+          lte:
+            argument_type:
+              type: named
+              name: Float
+      Bool:
+        aggregate_functions: {}
+        comparison_operators: {}
+      String:
+        aggregate_functions: {}
+        comparison_operators:
+          like:
+            argument_type:
+              type: named
+              name: String
+    functions: []
+    procedures: []
+    object_types:
+      _quantization:
+        description: Quantization Parameters for Qdrant
+        fields:
+          ignore:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Bool
+          rescore:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Bool
+          oversampling:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+      _params:
+        description: Search parameters for Qdrant
+        fields:
+          hnsw_ef:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Int
+          exact:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Bool
+          indexed_only:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Bool
+          quantization:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _quantization
+      _search:
+        description: Search the vector database for similar vectors
+        fields:
+          vector:
+            type:
+              type: array
+              element_type:
+                type: named
+                name: Float
+          params:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _params
+          score_threshold:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+      _recommend:
+        description: Provide an array of positive and negative example points and get a
+          recommendation
+        fields:
+          positive:
+            type:
+              type: array
+              element_type:
+                type: named
+                name: Int
+          negative:
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: named
+                  name: Int
+          params:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _params
+          score_threshold:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+      image_recipe:
+        description: null
+        fields:
+          image_name:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          ingredients:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: nullable
+                  underlying_type:
+                    type: named
+                    name: String
+          name:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          steps:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          vector_image:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          vector_text:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          id:
+            description: null
+            type:
+              type: named
+              name: Int
+          score:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+          vector:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+      article:
+        description: null
+        fields:
+          arr:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: nullable
+                  underlying_type:
+                    type: named
+                    name: Int
+          bool:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Bool
+          float:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+          int:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Int
+          string:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          id:
+            description: null
+            type:
+              type: named
+              name: Int
+          score:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+          vector:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+      text_recipe:
+        description: null
+        fields:
+          image_name:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          ingredients:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: nullable
+                  underlying_type:
+                    type: named
+                    name: String
+          name:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          steps:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          vector_image:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          vector_text:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          id:
+            description: null
+            type:
+              type: named
+              name: Int
+          score:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+          vector:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+      boolean:
+        description: null
+        fields:
+          A:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Bool
+          B:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Bool
+          C:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Bool
+          D:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Bool
+          id:
+            description: null
+            type:
+              type: named
+              name: Int
+          score:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+          vector:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+      multimodal_recipe:
+        description: null
+        fields:
+          image_name:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          ingredients:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: nullable
+                  underlying_type:
+                    type: named
+                    name: String
+          name:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          steps:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          vector_image:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          vector_text:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          id:
+            description: null
+            type:
+              type: named
+              name: Int
+          score:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+          vector:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+      Album:
+        description: null
+        fields:
+          ArtistId:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Int
+          Title:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: String
+          id:
+            description: null
+            type:
+              type: named
+              name: Int
+          score:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: Float
+          vector:
+            description: null
+            type:
+              type: nullable
+              underlying_type:
+                type: array
+                element_type:
+                  type: named
+                  name: Float
+    collections:
+      - name: image_recipe
+        description: null
+        arguments:
+          search:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _search
+          recommend:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _recommend
+        type: image_recipe
+        uniqueness_constraints:
+          Image_recipeByID:
+            unique_columns:
+              - id
+        foreign_keys: {}
+      - name: article
+        description: null
+        arguments:
+          search:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _search
+          recommend:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _recommend
+        type: article
+        uniqueness_constraints:
+          ArticleByID:
+            unique_columns:
+              - id
+        foreign_keys: {}
+      - name: text_recipe
+        description: null
+        arguments:
+          search:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _search
+          recommend:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _recommend
+        type: text_recipe
+        uniqueness_constraints:
+          Text_recipeByID:
+            unique_columns:
+              - id
+        foreign_keys: {}
+      - name: boolean
+        description: null
+        arguments:
+          search:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _search
+          recommend:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _recommend
+        type: boolean
+        uniqueness_constraints:
+          BooleanByID:
+            unique_columns:
+              - id
+        foreign_keys: {}
+      - name: multimodal_recipe
+        description: null
+        arguments:
+          search:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _search
+          recommend:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _recommend
+        type: multimodal_recipe
+        uniqueness_constraints:
+          Multimodal_recipeByID:
+            unique_columns:
+              - id
+        foreign_keys: {}
+      - name: Album
+        description: null
+        arguments:
+          search:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _search
+          recommend:
+            type:
+              type: nullable
+              underlying_type:
+                type: named
+                name: _recommend
+        type: Album
+        uniqueness_constraints:
+          AlbumByID:
+            unique_columns:
+              - id
+        foreign_keys: {}

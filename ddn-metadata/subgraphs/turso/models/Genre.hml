@@ -1,0 +1,86 @@
+kind: ObjectType
+version: v1
+definition:
+  name: Genre
+  graphql:
+    typeName: tursoGenre
+    inputTypeName: tursoGenreInput
+  fields:
+    - name: GenreId
+      type: Int!
+    - name: Name
+      type: String
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Genre
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - GenreId
+          - Name
+
+---
+kind: Model
+version: v1
+definition:
+  name: Genre
+  objectType: Genre
+  filterableFields:
+    - fieldName: GenreId
+      operators:
+        enableAll: true
+    - fieldName: Name
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: GenreId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: tursoGenreByGenreid
+        uniqueIdentifier:
+          - GenreId
+    selectMany:
+      queryRootField: tursoGenre
+    filterExpressionType: tursoGenreBoolExp
+    orderByExpressionType: tursoGenreOrderBy
+  source:
+    collection: Genre
+    dataConnectorName: turso_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Genre
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Tracks
+  source: Genre
+  target:
+    model:
+      relationshipType: Array
+      name: Track
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: GenreId
+      target:
+        modelField:
+          - fieldName: GenreId

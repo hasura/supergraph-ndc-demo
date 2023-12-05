@@ -1,0 +1,407 @@
+kind: ObjectType
+version: v1
+definition:
+  name: sample_data_nyc_service_requests
+  graphql:
+    typeName: duckdbSampleDataNycServiceRequests
+    inputTypeName: duckdbSampleDataNycServiceRequestsInput
+  fields:
+    - name: unique_key
+      type: Int!
+    - name: created_date
+      type: String!
+    - name: closed_date
+      type: String!
+    - name: agency
+      type: String!
+    - name: agency_name
+      type: String!
+    - name: complaint_type
+      type: String!
+    - name: descriptor
+      type: String!
+    - name: location_type
+      type: String!
+    - name: incident_zip
+      type: String!
+    - name: incident_address
+      type: String!
+    - name: street_name
+      type: String!
+    - name: cross_street_1
+      type: String!
+    - name: cross_street_2
+      type: String!
+    - name: intersection_street_1
+      type: String!
+    - name: intersection_street_2
+      type: String!
+    - name: address_type
+      type: String!
+    - name: city
+      type: String!
+    - name: landmark
+      type: String!
+    - name: facility_type
+      type: String!
+    - name: status
+      type: String!
+    - name: due_date
+      type: String!
+    - name: resolution_description
+      type: String!
+    - name: resolution_action_updated_date
+      type: String!
+    - name: community_board
+      type: String!
+    - name: bbl
+      type: String!
+    - name: borough
+      type: String!
+    - name: x_coordinate_state_plane
+      type: String!
+    - name: y_coordinate_state_plane
+      type: String!
+    - name: open_data_channel_type
+      type: String!
+    - name: park_facility_name
+      type: String!
+    - name: park_borough
+      type: String!
+    - name: vehicle_type
+      type: String!
+    - name: taxi_company_borough
+      type: String!
+    - name: taxi_pick_up_location
+      type: String!
+    - name: bridge_highway_name
+      type: String!
+    - name: bridge_highway_direction
+      type: String!
+    - name: road_ramp
+      type: String!
+    - name: bridge_highway_segment
+      type: String!
+    - name: latitude
+      type: Float!
+    - name: longitude
+      type: Float!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: sample_data_nyc_service_requests
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - unique_key
+          - created_date
+          - closed_date
+          - agency
+          - agency_name
+          - complaint_type
+          - descriptor
+          - location_type
+          - incident_zip
+          - incident_address
+          - street_name
+          - cross_street_1
+          - cross_street_2
+          - intersection_street_1
+          - intersection_street_2
+          - address_type
+          - city
+          - landmark
+          - facility_type
+          - status
+          - due_date
+          - resolution_description
+          - resolution_action_updated_date
+          - community_board
+          - bbl
+          - borough
+          - x_coordinate_state_plane
+          - y_coordinate_state_plane
+          - open_data_channel_type
+          - park_facility_name
+          - park_borough
+          - vehicle_type
+          - taxi_company_borough
+          - taxi_pick_up_location
+          - bridge_highway_name
+          - bridge_highway_direction
+          - road_ramp
+          - bridge_highway_segment
+          - latitude
+          - longitude
+
+---
+kind: Model
+version: v1
+definition:
+  name: sample_data_nyc_service_requests
+  objectType: sample_data_nyc_service_requests
+  filterableFields:
+    - fieldName: unique_key
+      operators:
+        enableAll: true
+    - fieldName: created_date
+      operators:
+        enableAll: true
+    - fieldName: closed_date
+      operators:
+        enableAll: true
+    - fieldName: agency
+      operators:
+        enableAll: true
+    - fieldName: agency_name
+      operators:
+        enableAll: true
+    - fieldName: complaint_type
+      operators:
+        enableAll: true
+    - fieldName: descriptor
+      operators:
+        enableAll: true
+    - fieldName: location_type
+      operators:
+        enableAll: true
+    - fieldName: incident_zip
+      operators:
+        enableAll: true
+    - fieldName: incident_address
+      operators:
+        enableAll: true
+    - fieldName: street_name
+      operators:
+        enableAll: true
+    - fieldName: cross_street_1
+      operators:
+        enableAll: true
+    - fieldName: cross_street_2
+      operators:
+        enableAll: true
+    - fieldName: intersection_street_1
+      operators:
+        enableAll: true
+    - fieldName: intersection_street_2
+      operators:
+        enableAll: true
+    - fieldName: address_type
+      operators:
+        enableAll: true
+    - fieldName: city
+      operators:
+        enableAll: true
+    - fieldName: landmark
+      operators:
+        enableAll: true
+    - fieldName: facility_type
+      operators:
+        enableAll: true
+    - fieldName: status
+      operators:
+        enableAll: true
+    - fieldName: due_date
+      operators:
+        enableAll: true
+    - fieldName: resolution_description
+      operators:
+        enableAll: true
+    - fieldName: resolution_action_updated_date
+      operators:
+        enableAll: true
+    - fieldName: community_board
+      operators:
+        enableAll: true
+    - fieldName: bbl
+      operators:
+        enableAll: true
+    - fieldName: borough
+      operators:
+        enableAll: true
+    - fieldName: x_coordinate_state_plane
+      operators:
+        enableAll: true
+    - fieldName: y_coordinate_state_plane
+      operators:
+        enableAll: true
+    - fieldName: open_data_channel_type
+      operators:
+        enableAll: true
+    - fieldName: park_facility_name
+      operators:
+        enableAll: true
+    - fieldName: park_borough
+      operators:
+        enableAll: true
+    - fieldName: vehicle_type
+      operators:
+        enableAll: true
+    - fieldName: taxi_company_borough
+      operators:
+        enableAll: true
+    - fieldName: taxi_pick_up_location
+      operators:
+        enableAll: true
+    - fieldName: bridge_highway_name
+      operators:
+        enableAll: true
+    - fieldName: bridge_highway_direction
+      operators:
+        enableAll: true
+    - fieldName: road_ramp
+      operators:
+        enableAll: true
+    - fieldName: bridge_highway_segment
+      operators:
+        enableAll: true
+    - fieldName: latitude
+      operators:
+        enableAll: true
+    - fieldName: longitude
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: unique_key
+      orderByDirections:
+        enableAll: true
+    - fieldName: created_date
+      orderByDirections:
+        enableAll: true
+    - fieldName: closed_date
+      orderByDirections:
+        enableAll: true
+    - fieldName: agency
+      orderByDirections:
+        enableAll: true
+    - fieldName: agency_name
+      orderByDirections:
+        enableAll: true
+    - fieldName: complaint_type
+      orderByDirections:
+        enableAll: true
+    - fieldName: descriptor
+      orderByDirections:
+        enableAll: true
+    - fieldName: location_type
+      orderByDirections:
+        enableAll: true
+    - fieldName: incident_zip
+      orderByDirections:
+        enableAll: true
+    - fieldName: incident_address
+      orderByDirections:
+        enableAll: true
+    - fieldName: street_name
+      orderByDirections:
+        enableAll: true
+    - fieldName: cross_street_1
+      orderByDirections:
+        enableAll: true
+    - fieldName: cross_street_2
+      orderByDirections:
+        enableAll: true
+    - fieldName: intersection_street_1
+      orderByDirections:
+        enableAll: true
+    - fieldName: intersection_street_2
+      orderByDirections:
+        enableAll: true
+    - fieldName: address_type
+      orderByDirections:
+        enableAll: true
+    - fieldName: city
+      orderByDirections:
+        enableAll: true
+    - fieldName: landmark
+      orderByDirections:
+        enableAll: true
+    - fieldName: facility_type
+      orderByDirections:
+        enableAll: true
+    - fieldName: status
+      orderByDirections:
+        enableAll: true
+    - fieldName: due_date
+      orderByDirections:
+        enableAll: true
+    - fieldName: resolution_description
+      orderByDirections:
+        enableAll: true
+    - fieldName: resolution_action_updated_date
+      orderByDirections:
+        enableAll: true
+    - fieldName: community_board
+      orderByDirections:
+        enableAll: true
+    - fieldName: bbl
+      orderByDirections:
+        enableAll: true
+    - fieldName: borough
+      orderByDirections:
+        enableAll: true
+    - fieldName: x_coordinate_state_plane
+      orderByDirections:
+        enableAll: true
+    - fieldName: y_coordinate_state_plane
+      orderByDirections:
+        enableAll: true
+    - fieldName: open_data_channel_type
+      orderByDirections:
+        enableAll: true
+    - fieldName: park_facility_name
+      orderByDirections:
+        enableAll: true
+    - fieldName: park_borough
+      orderByDirections:
+        enableAll: true
+    - fieldName: vehicle_type
+      orderByDirections:
+        enableAll: true
+    - fieldName: taxi_company_borough
+      orderByDirections:
+        enableAll: true
+    - fieldName: taxi_pick_up_location
+      orderByDirections:
+        enableAll: true
+    - fieldName: bridge_highway_name
+      orderByDirections:
+        enableAll: true
+    - fieldName: bridge_highway_direction
+      orderByDirections:
+        enableAll: true
+    - fieldName: road_ramp
+      orderByDirections:
+        enableAll: true
+    - fieldName: bridge_highway_segment
+      orderByDirections:
+        enableAll: true
+    - fieldName: latitude
+      orderByDirections:
+        enableAll: true
+    - fieldName: longitude
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques: []
+    selectMany:
+      queryRootField: duckdbSampleDataNycServiceRequests
+    filterExpressionType: duckdbSampleDataNycServiceRequestsBoolExp
+    orderByExpressionType: duckdbSampleDataNycServiceRequestsOrderBy
+  source:
+    collection: sample_data_nyc_service_requests
+    dataConnectorName: duckdb_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: sample_data_nyc_service_requests
+  permissions:
+    - role: admin
+      select:
+        filter: null

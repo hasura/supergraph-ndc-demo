@@ -1,0 +1,173 @@
+kind: ObjectType
+version: v1
+definition:
+  name: sample_data_hn_hacker_news
+  graphql:
+    typeName: duckdbSampleDataHnHackerNews
+    inputTypeName: duckdbSampleDataHnHackerNewsInput
+  fields:
+    - name: title
+      type: String!
+    - name: url
+      type: String!
+    - name: text
+      type: String!
+    - name: dead
+      type: Boolean!
+    - name: by
+      type: String!
+    - name: score
+      type: Int!
+    - name: time
+      type: Int!
+    - name: timestamp
+      type: String!
+    - name: type
+      type: String!
+    - name: id
+      type: Int!
+    - name: parent
+      type: Int!
+    - name: descendants
+      type: Int!
+    - name: ranking
+      type: Int!
+    - name: deleted
+      type: Boolean!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: sample_data_hn_hacker_news
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - title
+          - url
+          - text
+          - dead
+          - by
+          - score
+          - time
+          - timestamp
+          - type
+          - id
+          - parent
+          - descendants
+          - ranking
+          - deleted
+
+---
+kind: Model
+version: v1
+definition:
+  name: sample_data_hn_hacker_news
+  objectType: sample_data_hn_hacker_news
+  filterableFields:
+    - fieldName: title
+      operators:
+        enableAll: true
+    - fieldName: url
+      operators:
+        enableAll: true
+    - fieldName: text
+      operators:
+        enableAll: true
+    - fieldName: dead
+      operators:
+        enableAll: true
+    - fieldName: by
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: time
+      operators:
+        enableAll: true
+    - fieldName: timestamp
+      operators:
+        enableAll: true
+    - fieldName: type
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: parent
+      operators:
+        enableAll: true
+    - fieldName: descendants
+      operators:
+        enableAll: true
+    - fieldName: ranking
+      operators:
+        enableAll: true
+    - fieldName: deleted
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: title
+      orderByDirections:
+        enableAll: true
+    - fieldName: url
+      orderByDirections:
+        enableAll: true
+    - fieldName: text
+      orderByDirections:
+        enableAll: true
+    - fieldName: dead
+      orderByDirections:
+        enableAll: true
+    - fieldName: by
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: time
+      orderByDirections:
+        enableAll: true
+    - fieldName: timestamp
+      orderByDirections:
+        enableAll: true
+    - fieldName: type
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: parent
+      orderByDirections:
+        enableAll: true
+    - fieldName: descendants
+      orderByDirections:
+        enableAll: true
+    - fieldName: ranking
+      orderByDirections:
+        enableAll: true
+    - fieldName: deleted
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques: []
+    selectMany:
+      queryRootField: duckdbSampleDataHnHackerNews
+    filterExpressionType: duckdbSampleDataHnHackerNewsBoolExp
+    orderByExpressionType: duckdbSampleDataHnHackerNewsOrderBy
+  source:
+    collection: sample_data_hn_hacker_news
+    dataConnectorName: duckdb_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: sample_data_hn_hacker_news
+  permissions:
+    - role: admin
+      select:
+        filter: null

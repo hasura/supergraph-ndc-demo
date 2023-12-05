@@ -1,0 +1,263 @@
+kind: ObjectType
+version: v1
+definition:
+  name: sample_data_nyc_rideshare
+  graphql:
+    typeName: duckdbSampleDataNycRideshare
+    inputTypeName: duckdbSampleDataNycRideshareInput
+  fields:
+    - name: hvfhs_license_num
+      type: String!
+    - name: dispatching_base_num
+      type: String!
+    - name: originating_base_num
+      type: String!
+    - name: request_datetime
+      type: String!
+    - name: on_scene_datetime
+      type: String!
+    - name: pickup_datetime
+      type: String!
+    - name: dropoff_datetime
+      type: String!
+    - name: PULocationID
+      type: Int!
+    - name: DOLocationID
+      type: Int!
+    - name: trip_miles
+      type: Float!
+    - name: trip_time
+      type: Int!
+    - name: base_passenger_fare
+      type: Float!
+    - name: tolls
+      type: Float!
+    - name: bcf
+      type: Float!
+    - name: sales_tax
+      type: Float!
+    - name: congestion_surcharge
+      type: Float!
+    - name: airport_fee
+      type: Float!
+    - name: tips
+      type: Float!
+    - name: driver_pay
+      type: Float!
+    - name: shared_request_flag
+      type: String!
+    - name: shared_match_flag
+      type: String!
+    - name: access_a_ride_flag
+      type: String!
+    - name: wav_request_flag
+      type: String!
+    - name: wav_match_flag
+      type: String!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: sample_data_nyc_rideshare
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - hvfhs_license_num
+          - dispatching_base_num
+          - originating_base_num
+          - request_datetime
+          - on_scene_datetime
+          - pickup_datetime
+          - dropoff_datetime
+          - PULocationID
+          - DOLocationID
+          - trip_miles
+          - trip_time
+          - base_passenger_fare
+          - tolls
+          - bcf
+          - sales_tax
+          - congestion_surcharge
+          - airport_fee
+          - tips
+          - driver_pay
+          - shared_request_flag
+          - shared_match_flag
+          - access_a_ride_flag
+          - wav_request_flag
+          - wav_match_flag
+
+---
+kind: Model
+version: v1
+definition:
+  name: sample_data_nyc_rideshare
+  objectType: sample_data_nyc_rideshare
+  filterableFields:
+    - fieldName: hvfhs_license_num
+      operators:
+        enableAll: true
+    - fieldName: dispatching_base_num
+      operators:
+        enableAll: true
+    - fieldName: originating_base_num
+      operators:
+        enableAll: true
+    - fieldName: request_datetime
+      operators:
+        enableAll: true
+    - fieldName: on_scene_datetime
+      operators:
+        enableAll: true
+    - fieldName: pickup_datetime
+      operators:
+        enableAll: true
+    - fieldName: dropoff_datetime
+      operators:
+        enableAll: true
+    - fieldName: PULocationID
+      operators:
+        enableAll: true
+    - fieldName: DOLocationID
+      operators:
+        enableAll: true
+    - fieldName: trip_miles
+      operators:
+        enableAll: true
+    - fieldName: trip_time
+      operators:
+        enableAll: true
+    - fieldName: base_passenger_fare
+      operators:
+        enableAll: true
+    - fieldName: tolls
+      operators:
+        enableAll: true
+    - fieldName: bcf
+      operators:
+        enableAll: true
+    - fieldName: sales_tax
+      operators:
+        enableAll: true
+    - fieldName: congestion_surcharge
+      operators:
+        enableAll: true
+    - fieldName: airport_fee
+      operators:
+        enableAll: true
+    - fieldName: tips
+      operators:
+        enableAll: true
+    - fieldName: driver_pay
+      operators:
+        enableAll: true
+    - fieldName: shared_request_flag
+      operators:
+        enableAll: true
+    - fieldName: shared_match_flag
+      operators:
+        enableAll: true
+    - fieldName: access_a_ride_flag
+      operators:
+        enableAll: true
+    - fieldName: wav_request_flag
+      operators:
+        enableAll: true
+    - fieldName: wav_match_flag
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: hvfhs_license_num
+      orderByDirections:
+        enableAll: true
+    - fieldName: dispatching_base_num
+      orderByDirections:
+        enableAll: true
+    - fieldName: originating_base_num
+      orderByDirections:
+        enableAll: true
+    - fieldName: request_datetime
+      orderByDirections:
+        enableAll: true
+    - fieldName: on_scene_datetime
+      orderByDirections:
+        enableAll: true
+    - fieldName: pickup_datetime
+      orderByDirections:
+        enableAll: true
+    - fieldName: dropoff_datetime
+      orderByDirections:
+        enableAll: true
+    - fieldName: PULocationID
+      orderByDirections:
+        enableAll: true
+    - fieldName: DOLocationID
+      orderByDirections:
+        enableAll: true
+    - fieldName: trip_miles
+      orderByDirections:
+        enableAll: true
+    - fieldName: trip_time
+      orderByDirections:
+        enableAll: true
+    - fieldName: base_passenger_fare
+      orderByDirections:
+        enableAll: true
+    - fieldName: tolls
+      orderByDirections:
+        enableAll: true
+    - fieldName: bcf
+      orderByDirections:
+        enableAll: true
+    - fieldName: sales_tax
+      orderByDirections:
+        enableAll: true
+    - fieldName: congestion_surcharge
+      orderByDirections:
+        enableAll: true
+    - fieldName: airport_fee
+      orderByDirections:
+        enableAll: true
+    - fieldName: tips
+      orderByDirections:
+        enableAll: true
+    - fieldName: driver_pay
+      orderByDirections:
+        enableAll: true
+    - fieldName: shared_request_flag
+      orderByDirections:
+        enableAll: true
+    - fieldName: shared_match_flag
+      orderByDirections:
+        enableAll: true
+    - fieldName: access_a_ride_flag
+      orderByDirections:
+        enableAll: true
+    - fieldName: wav_request_flag
+      orderByDirections:
+        enableAll: true
+    - fieldName: wav_match_flag
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques: []
+    selectMany:
+      queryRootField: duckdbSampleDataNycRideshare
+    filterExpressionType: duckdbSampleDataNycRideshareBoolExp
+    orderByExpressionType: duckdbSampleDataNycRideshareOrderBy
+  source:
+    collection: sample_data_nyc_rideshare
+    dataConnectorName: duckdb_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: sample_data_nyc_rideshare
+  permissions:
+    - role: admin
+      select:
+        filter: null

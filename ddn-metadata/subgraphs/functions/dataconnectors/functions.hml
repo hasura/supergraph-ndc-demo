@@ -1,0 +1,130 @@
+kind: DataConnector
+version: v1
+definition:
+  name: functions_connector
+  url:
+    singleUrl: "https://connector-6606e963-47c8-4257-8563-ddb8119467be-hyc5v23h6a-ue.a.run.app"
+  schema:
+    scalar_types:
+      String:
+        aggregate_functions: {}
+        comparison_operators: {}
+      Float:
+        aggregate_functions: {}
+        comparison_operators: {}
+      Boolean:
+        aggregate_functions: {}
+        comparison_operators: {}
+      Array_of_containsElement_arguments_arr:
+        aggregate_functions: {}
+        comparison_operators: {}
+      containsElement_arguments_element:
+        aggregate_functions: {}
+        comparison_operators: {}
+      fetchCatFacts_output:
+        aggregate_functions: {}
+        comparison_operators: {}
+      fetchRandomDadJoke_output:
+        aggregate_functions: {}
+        comparison_operators: {}
+    object_types: {}
+    collections: []
+    functions: []
+    procedures:
+      - name: helloWorld
+        arguments: {}
+        result_type:
+          type: named
+          name: String
+      - name: addNumbers
+        arguments:
+          a:
+            type:
+              type: named
+              name: Float
+          b:
+            type:
+              type: named
+              name: Float
+        result_type:
+          type: named
+          name: Float
+      - name: isEven
+        arguments:
+          num:
+            type:
+              type: named
+              name: Float
+        result_type:
+          type: named
+          name: Boolean
+      - name: stringLength
+        arguments:
+          str:
+            type:
+              type: named
+              name: String
+        result_type:
+          type: named
+          name: Float
+      - name: containsElement
+        arguments:
+          arr:
+            type:
+              type: array
+              element_type:
+                type: named
+                name: Array_of_containsElement_arguments_arr
+          element:
+            type:
+              type: named
+              name: containsElement_arguments_element
+        result_type:
+          type: named
+          name: Boolean
+      - name: generateRange
+        arguments:
+          start:
+            type:
+              type: named
+              name: Float
+          end:
+            type:
+              type: named
+              name: Float
+        result_type:
+          type: array
+          element_type:
+            type: named
+            name: Float
+      - name: fetchCatFacts
+        arguments:
+          page:
+            type:
+              type: named
+              name: Float
+          max_length:
+            type:
+              type: named
+              name: Float
+          limit:
+            type:
+              type: named
+              name: Float
+        result_type:
+          type: named
+          name: fetchCatFacts_output
+      - name: fetchRandomDadJoke
+        arguments: {}
+        result_type:
+          type: named
+          name: fetchRandomDadJoke_output
+      - name: defineWord
+        arguments:
+          word:
+            type:
+              type: named
+              name: String
+        result_type:
+          type: named
+          name: String

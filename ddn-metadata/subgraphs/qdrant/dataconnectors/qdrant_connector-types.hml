@@ -1,0 +1,168 @@
+kind: ScalarType
+version: v1
+definition:
+  name: Bool
+  graphql:
+    typeName: qdrantBool
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: qdrant_connector
+  dataConnectorScalarType: String
+  representation: String
+  graphql:
+    comparisonExpressionTypeName: QdrantQdrantConnectorStringComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: qdrant_connector
+  dataConnectorScalarType: Int
+  representation: Int
+  graphql:
+    comparisonExpressionTypeName: QdrantQdrantConnectorIntComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: qdrant_connector
+  dataConnectorScalarType: Float
+  representation: Float
+  graphql:
+    comparisonExpressionTypeName: QdrantQdrantConnectorFloatComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: qdrant_connector
+  dataConnectorScalarType: Bool
+  representation: Bool
+  graphql:
+    comparisonExpressionTypeName: qdrantBoolComparisonExp
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: _quantization
+  graphql:
+    typeName: qdrantQuantization
+    inputTypeName: qdrantQuantizationInput
+  fields:
+    - name: ignore
+      type: Bool
+    - name: rescore
+      type: Bool
+    - name: oversampling
+      type: Float
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: _params
+  graphql:
+    typeName: qdrantParams
+    inputTypeName: qdrantParamsInput
+  fields:
+    - name: hnsw_ef
+      type: Int
+    - name: exact
+      type: Bool
+    - name: indexed_only
+      type: Bool
+    - name: quantization
+      type: _quantization
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: _search
+  graphql:
+    typeName: qdrantSearch
+    inputTypeName: qdrantSearchInput
+  fields:
+    - name: vector
+      type: "[Float!]!"
+    - name: params
+      type: _params
+    - name: score_threshold
+      type: Float
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: _recommend
+  graphql:
+    typeName: qdrantRecommend
+    inputTypeName: qdrantRecommendInput
+  fields:
+    - name: positive
+      type: "[Int!]!"
+    - name: negative
+      type: "[Int!]"
+    - name: params
+      type: _params
+    - name: score_threshold
+      type: Float
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: _quantization
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - ignore
+          - rescore
+          - oversampling
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: _params
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - hnsw_ef
+          - exact
+          - indexed_only
+          - quantization
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: _search
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - vector
+          - params
+          - score_threshold
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: _recommend
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - positive
+          - negative
+          - params
+          - score_threshold

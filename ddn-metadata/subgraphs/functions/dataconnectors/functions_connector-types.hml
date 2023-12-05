@@ -1,0 +1,100 @@
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: functions_connector
+  dataConnectorScalarType: String
+  representation: String
+  graphql:
+    comparisonExpressionTypeName: FunctionsFunctionsConnectorStringComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: functions_connector
+  dataConnectorScalarType: Float
+  representation: Float
+  graphql:
+    comparisonExpressionTypeName: FunctionsFunctionsConnectorFloatComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: functions_connector
+  dataConnectorScalarType: Boolean
+  representation: Boolean
+  graphql:
+    comparisonExpressionTypeName: FunctionsFunctionsConnectorBooleanComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: Array_of_containsElement_arguments_arr
+  graphql:
+    typeName: functionsArrayOfContainselementArgumentsArr
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: containsElement_arguments_element
+  graphql:
+    typeName: functionsContainselementArgumentsElement
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: functions_connector
+  dataConnectorScalarType: Array_of_containsElement_arguments_arr
+  representation: Array_of_containsElement_arguments_arr
+  graphql:
+    comparisonExpressionTypeName: functionsArrayOfContainselementArgumentsArrComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: functions_connector
+  dataConnectorScalarType: containsElement_arguments_element
+  representation: containsElement_arguments_element
+  graphql:
+    comparisonExpressionTypeName: functionsContainselementArgumentsElementComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: fetchCatFacts_output
+  graphql:
+    typeName: functionsFetchcatfactsOutput
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: functions_connector
+  dataConnectorScalarType: fetchCatFacts_output
+  representation: fetchCatFacts_output
+  graphql:
+    comparisonExpressionTypeName: functionsFetchcatfactsOutputComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: fetchRandomDadJoke_output
+  graphql:
+    typeName: functionsFetchrandomdadjokeOutput
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: functions_connector
+  dataConnectorScalarType: fetchRandomDadJoke_output
+  representation: fetchRandomDadJoke_output
+  graphql:
+    comparisonExpressionTypeName: functionsFetchrandomdadjokeOutputComparisonExp

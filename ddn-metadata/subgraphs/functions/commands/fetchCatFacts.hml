@@ -1,0 +1,28 @@
+kind: Command
+version: v1
+definition:
+  name: fetchCatFacts
+  outputType: fetchCatFacts_output!
+  arguments:
+    - name: page
+      type: Float!
+    - name: max_length
+      type: Float!
+    - name: limit
+      type: Float!
+  source:
+    dataConnectorName: functions_connector
+    dataConnectorCommand:
+      procedure: fetchCatFacts
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: functionsFetchcatfacts
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: fetchCatFacts
+  permissions:
+    - role: admin
+      allowExecution: true

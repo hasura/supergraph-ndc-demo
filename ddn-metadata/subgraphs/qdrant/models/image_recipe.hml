@@ -1,0 +1,136 @@
+kind: ObjectType
+version: v1
+definition:
+  name: image_recipe
+  graphql:
+    typeName: qdrantImageRecipe
+    inputTypeName: qdrantImageRecipeInput
+  fields:
+    - name: image_name
+      type: String
+    - name: ingredients
+      type: "[String]"
+    - name: name
+      type: String
+    - name: steps
+      type: String
+    - name: vector_image
+      type: String
+    - name: vector_text
+      type: String
+    - name: id
+      type: Int!
+    - name: score
+      type: Float
+    - name: vector
+      type: "[Float!]"
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: image_recipe
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - image_name
+          - ingredients
+          - name
+          - steps
+          - vector_image
+          - vector_text
+          - id
+          - score
+          - vector
+
+---
+kind: Model
+version: v1
+definition:
+  name: image_recipe
+  objectType: image_recipe
+  filterableFields:
+    - fieldName: image_name
+      operators:
+        enableAll: true
+    - fieldName: ingredients
+      operators:
+        enableAll: true
+    - fieldName: name
+      operators:
+        enableAll: true
+    - fieldName: steps
+      operators:
+        enableAll: true
+    - fieldName: vector_image
+      operators:
+        enableAll: true
+    - fieldName: vector_text
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: image_name
+      orderByDirections:
+        enableAll: true
+    - fieldName: ingredients
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: steps
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector_image
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector_text
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  arguments:
+    - name: search
+      type: _search
+    - name: recommend
+      type: _recommend
+  graphql:
+    selectUniques:
+      - queryRootField: qdrantImageRecipeById
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: qdrantImageRecipe
+    filterExpressionType: qdrantImageRecipeBoolExp
+    orderByExpressionType: qdrantImageRecipeOrderBy
+    argumentsInputType: qdrantImageRecipeArgs
+  source:
+    collection: image_recipe
+    dataConnectorName: qdrant_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: image_recipe
+  permissions:
+    - role: admin
+      select:
+        filter: null

@@ -1,0 +1,24 @@
+kind: Command
+version: v1
+definition:
+  name: isEven
+  outputType: Boolean!
+  arguments:
+    - name: num
+      type: Float!
+  source:
+    dataConnectorName: functions_connector
+    dataConnectorCommand:
+      procedure: isEven
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: functionsIseven
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: isEven
+  permissions:
+    - role: admin
+      allowExecution: true

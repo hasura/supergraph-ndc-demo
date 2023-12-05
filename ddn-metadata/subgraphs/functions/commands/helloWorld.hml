@@ -1,0 +1,22 @@
+kind: Command
+version: v1
+definition:
+  name: helloWorld
+  outputType: String!
+  arguments: []
+  source:
+    dataConnectorName: functions_connector
+    dataConnectorCommand:
+      procedure: helloWorld
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: functionsHelloworld
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: helloWorld
+  permissions:
+    - role: admin
+      allowExecution: true

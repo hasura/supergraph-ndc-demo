@@ -1,0 +1,86 @@
+kind: ObjectType
+version: v1
+definition:
+  name: Playlist
+  graphql:
+    typeName: tursoPlaylist
+    inputTypeName: tursoPlaylistInput
+  fields:
+    - name: PlaylistId
+      type: Int!
+    - name: Name
+      type: String
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Playlist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - PlaylistId
+          - Name
+
+---
+kind: Model
+version: v1
+definition:
+  name: Playlist
+  objectType: Playlist
+  filterableFields:
+    - fieldName: PlaylistId
+      operators:
+        enableAll: true
+    - fieldName: Name
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: PlaylistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: tursoPlaylistByPlaylistid
+        uniqueIdentifier:
+          - PlaylistId
+    selectMany:
+      queryRootField: tursoPlaylist
+    filterExpressionType: tursoPlaylistBoolExp
+    orderByExpressionType: tursoPlaylistOrderBy
+  source:
+    collection: Playlist
+    dataConnectorName: turso_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Playlist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: PlaylistTracks
+  source: Playlist
+  target:
+    model:
+      relationshipType: Array
+      name: PlaylistTrack
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: PlaylistId
+      target:
+        modelField:
+          - fieldName: PlaylistId

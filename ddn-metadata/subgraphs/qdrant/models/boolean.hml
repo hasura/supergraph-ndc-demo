@@ -1,0 +1,118 @@
+kind: ObjectType
+version: v1
+definition:
+  name: boolean
+  graphql:
+    typeName: qdrantBoolean
+    inputTypeName: qdrantBooleanInput
+  fields:
+    - name: A
+      type: Bool
+    - name: B
+      type: Bool
+    - name: C
+      type: Bool
+    - name: D
+      type: Bool
+    - name: id
+      type: Int!
+    - name: score
+      type: Float
+    - name: vector
+      type: "[Float!]"
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: boolean
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - A
+          - B
+          - C
+          - D
+          - id
+          - score
+          - vector
+
+---
+kind: Model
+version: v1
+definition:
+  name: boolean
+  objectType: boolean
+  filterableFields:
+    - fieldName: A
+      operators:
+        enableAll: true
+    - fieldName: B
+      operators:
+        enableAll: true
+    - fieldName: C
+      operators:
+        enableAll: true
+    - fieldName: D
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: A
+      orderByDirections:
+        enableAll: true
+    - fieldName: B
+      orderByDirections:
+        enableAll: true
+    - fieldName: C
+      orderByDirections:
+        enableAll: true
+    - fieldName: D
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  arguments:
+    - name: search
+      type: _search
+    - name: recommend
+      type: _recommend
+  graphql:
+    selectUniques:
+      - queryRootField: qdrantBooleanById
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: qdrantBoolean
+    filterExpressionType: qdrantBooleanBoolExp
+    orderByExpressionType: qdrantBooleanOrderBy
+    argumentsInputType: qdrantBooleanArgs
+  source:
+    collection: boolean
+    dataConnectorName: qdrant_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: boolean
+  permissions:
+    - role: admin
+      select:
+        filter: null

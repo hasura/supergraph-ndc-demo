@@ -1,0 +1,227 @@
+kind: ObjectType
+version: v1
+definition:
+  name: sample_data_who_ambient_air_quality
+  graphql:
+    typeName: duckdbSampleDataWhoAmbientAirQuality
+    inputTypeName: duckdbSampleDataWhoAmbientAirQualityInput
+  fields:
+    - name: who_region
+      type: String!
+    - name: iso3
+      type: String!
+    - name: country_name
+      type: String!
+    - name: city
+      type: String!
+    - name: year
+      type: Int!
+    - name: version
+      type: String!
+    - name: pm10_concentration
+      type: Int!
+    - name: pm25_concentration
+      type: Int!
+    - name: no2_concentration
+      type: Int!
+    - name: pm10_tempcov
+      type: Int!
+    - name: pm25_tempcov
+      type: Int!
+    - name: no2_tempcov
+      type: Int!
+    - name: type_of_stations
+      type: String!
+    - name: reference
+      type: String!
+    - name: web_link
+      type: String!
+    - name: population
+      type: String!
+    - name: population_source
+      type: String!
+    - name: latitude
+      type: Float!
+    - name: longitude
+      type: Float!
+    - name: who_ms
+      type: Int!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: sample_data_who_ambient_air_quality
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - who_region
+          - iso3
+          - country_name
+          - city
+          - year
+          - version
+          - pm10_concentration
+          - pm25_concentration
+          - no2_concentration
+          - pm10_tempcov
+          - pm25_tempcov
+          - no2_tempcov
+          - type_of_stations
+          - reference
+          - web_link
+          - population
+          - population_source
+          - latitude
+          - longitude
+          - who_ms
+
+---
+kind: Model
+version: v1
+definition:
+  name: sample_data_who_ambient_air_quality
+  objectType: sample_data_who_ambient_air_quality
+  filterableFields:
+    - fieldName: who_region
+      operators:
+        enableAll: true
+    - fieldName: iso3
+      operators:
+        enableAll: true
+    - fieldName: country_name
+      operators:
+        enableAll: true
+    - fieldName: city
+      operators:
+        enableAll: true
+    - fieldName: year
+      operators:
+        enableAll: true
+    - fieldName: version
+      operators:
+        enableAll: true
+    - fieldName: pm10_concentration
+      operators:
+        enableAll: true
+    - fieldName: pm25_concentration
+      operators:
+        enableAll: true
+    - fieldName: no2_concentration
+      operators:
+        enableAll: true
+    - fieldName: pm10_tempcov
+      operators:
+        enableAll: true
+    - fieldName: pm25_tempcov
+      operators:
+        enableAll: true
+    - fieldName: no2_tempcov
+      operators:
+        enableAll: true
+    - fieldName: type_of_stations
+      operators:
+        enableAll: true
+    - fieldName: reference
+      operators:
+        enableAll: true
+    - fieldName: web_link
+      operators:
+        enableAll: true
+    - fieldName: population
+      operators:
+        enableAll: true
+    - fieldName: population_source
+      operators:
+        enableAll: true
+    - fieldName: latitude
+      operators:
+        enableAll: true
+    - fieldName: longitude
+      operators:
+        enableAll: true
+    - fieldName: who_ms
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: who_region
+      orderByDirections:
+        enableAll: true
+    - fieldName: iso3
+      orderByDirections:
+        enableAll: true
+    - fieldName: country_name
+      orderByDirections:
+        enableAll: true
+    - fieldName: city
+      orderByDirections:
+        enableAll: true
+    - fieldName: year
+      orderByDirections:
+        enableAll: true
+    - fieldName: version
+      orderByDirections:
+        enableAll: true
+    - fieldName: pm10_concentration
+      orderByDirections:
+        enableAll: true
+    - fieldName: pm25_concentration
+      orderByDirections:
+        enableAll: true
+    - fieldName: no2_concentration
+      orderByDirections:
+        enableAll: true
+    - fieldName: pm10_tempcov
+      orderByDirections:
+        enableAll: true
+    - fieldName: pm25_tempcov
+      orderByDirections:
+        enableAll: true
+    - fieldName: no2_tempcov
+      orderByDirections:
+        enableAll: true
+    - fieldName: type_of_stations
+      orderByDirections:
+        enableAll: true
+    - fieldName: reference
+      orderByDirections:
+        enableAll: true
+    - fieldName: web_link
+      orderByDirections:
+        enableAll: true
+    - fieldName: population
+      orderByDirections:
+        enableAll: true
+    - fieldName: population_source
+      orderByDirections:
+        enableAll: true
+    - fieldName: latitude
+      orderByDirections:
+        enableAll: true
+    - fieldName: longitude
+      orderByDirections:
+        enableAll: true
+    - fieldName: who_ms
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques: []
+    selectMany:
+      queryRootField: duckdbSampleDataWhoAmbientAirQuality
+    filterExpressionType: duckdbSampleDataWhoAmbientAirQualityBoolExp
+    orderByExpressionType: duckdbSampleDataWhoAmbientAirQualityOrderBy
+  source:
+    collection: sample_data_who_ambient_air_quality
+    dataConnectorName: duckdb_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: sample_data_who_ambient_air_quality
+  permissions:
+    - role: admin
+      select:
+        filter: null

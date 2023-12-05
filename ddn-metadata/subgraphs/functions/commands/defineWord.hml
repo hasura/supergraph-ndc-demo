@@ -1,0 +1,24 @@
+kind: Command
+version: v1
+definition:
+  name: defineWord
+  outputType: String!
+  arguments:
+    - name: word
+      type: String!
+  source:
+    dataConnectorName: functions_connector
+    dataConnectorCommand:
+      procedure: defineWord
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: functionsDefineword
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: defineWord
+  permissions:
+    - role: admin
+      allowExecution: true

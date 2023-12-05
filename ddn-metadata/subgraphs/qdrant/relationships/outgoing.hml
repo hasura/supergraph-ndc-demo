@@ -1,0 +1,37 @@
+---
+kind: Relationship
+version: v1
+definition:
+  name: tursoArtist
+  source: Album
+  target:
+    model:
+      relationshipType: Object
+      name: Artist
+      namespace: turso
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ArtistId
+      target:
+        modelField:
+          - fieldName: ArtistId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: tursoAlbum
+  source: Album
+  target:
+    model: 
+      relationshipType: Object
+      name: Album
+      namespace: turso
+  mapping: 
+    - source: 
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: AlbumId

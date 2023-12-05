@@ -1,0 +1,203 @@
+kind: ObjectType
+version: v1
+definition:
+  name: Customer
+  graphql:
+    typeName: tursoCustomer
+    inputTypeName: tursoCustomerInput
+  fields:
+    - name: CustomerId
+      type: Int!
+    - name: FirstName
+      type: String!
+    - name: LastName
+      type: String!
+    - name: Company
+      type: String
+    - name: Address
+      type: String
+    - name: City
+      type: String
+    - name: State
+      type: String
+    - name: Country
+      type: String
+    - name: PostalCode
+      type: String
+    - name: Phone
+      type: String
+    - name: Fax
+      type: String
+    - name: Email
+      type: String!
+    - name: SupportRepId
+      type: Int
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Customer
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - CustomerId
+          - FirstName
+          - LastName
+          - Company
+          - Address
+          - City
+          - State
+          - Country
+          - PostalCode
+          - Phone
+          - Fax
+          - Email
+          - SupportRepId
+
+---
+kind: Model
+version: v1
+definition:
+  name: Customer
+  objectType: Customer
+  filterableFields:
+    - fieldName: CustomerId
+      operators:
+        enableAll: true
+    - fieldName: FirstName
+      operators:
+        enableAll: true
+    - fieldName: LastName
+      operators:
+        enableAll: true
+    - fieldName: Company
+      operators:
+        enableAll: true
+    - fieldName: Address
+      operators:
+        enableAll: true
+    - fieldName: City
+      operators:
+        enableAll: true
+    - fieldName: State
+      operators:
+        enableAll: true
+    - fieldName: Country
+      operators:
+        enableAll: true
+    - fieldName: PostalCode
+      operators:
+        enableAll: true
+    - fieldName: Phone
+      operators:
+        enableAll: true
+    - fieldName: Fax
+      operators:
+        enableAll: true
+    - fieldName: Email
+      operators:
+        enableAll: true
+    - fieldName: SupportRepId
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: CustomerId
+      orderByDirections:
+        enableAll: true
+    - fieldName: FirstName
+      orderByDirections:
+        enableAll: true
+    - fieldName: LastName
+      orderByDirections:
+        enableAll: true
+    - fieldName: Company
+      orderByDirections:
+        enableAll: true
+    - fieldName: Address
+      orderByDirections:
+        enableAll: true
+    - fieldName: City
+      orderByDirections:
+        enableAll: true
+    - fieldName: State
+      orderByDirections:
+        enableAll: true
+    - fieldName: Country
+      orderByDirections:
+        enableAll: true
+    - fieldName: PostalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: Phone
+      orderByDirections:
+        enableAll: true
+    - fieldName: Fax
+      orderByDirections:
+        enableAll: true
+    - fieldName: Email
+      orderByDirections:
+        enableAll: true
+    - fieldName: SupportRepId
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: tursoCustomerByCustomerid
+        uniqueIdentifier:
+          - CustomerId
+    selectMany:
+      queryRootField: tursoCustomer
+    filterExpressionType: tursoCustomerBoolExp
+    orderByExpressionType: tursoCustomerOrderBy
+  source:
+    collection: Customer
+    dataConnectorName: turso_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Customer
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Employee
+  source: Customer
+  target:
+    model:
+      relationshipType: Object
+      name: Employee
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: SupportRepId
+      target:
+        modelField:
+          - fieldName: EmployeeId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Invoices
+  source: Customer
+  target:
+    model:
+      relationshipType: Array
+      name: Invoice
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: CustomerId
+      target:
+        modelField:
+          - fieldName: CustomerId

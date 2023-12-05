@@ -1,0 +1,86 @@
+kind: ObjectType
+version: v1
+definition:
+  name: Artist
+  graphql:
+    typeName: tursoArtist
+    inputTypeName: tursoArtistInput
+  fields:
+    - name: ArtistId
+      type: Int!
+    - name: Name
+      type: String
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Artist
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - ArtistId
+          - Name
+
+---
+kind: Model
+version: v1
+definition:
+  name: Artist
+  objectType: Artist
+  filterableFields:
+    - fieldName: ArtistId
+      operators:
+        enableAll: true
+    - fieldName: Name
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: ArtistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: tursoArtistByArtistid
+        uniqueIdentifier:
+          - ArtistId
+    selectMany:
+      queryRootField: tursoArtist
+    filterExpressionType: tursoArtistBoolExp
+    orderByExpressionType: tursoArtistOrderBy
+  source:
+    collection: Artist
+    dataConnectorName: turso_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Artist
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Albums
+  source: Artist
+  target:
+    model:
+      relationshipType: Array
+      name: Album
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ArtistId
+      target:
+        modelField:
+          - fieldName: ArtistId

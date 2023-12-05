@@ -1,0 +1,26 @@
+kind: Command
+version: v1
+definition:
+  name: containsElement
+  outputType: Boolean!
+  arguments:
+    - name: arr
+      type: "[Array_of_containsElement_arguments_arr!]!"
+    - name: element
+      type: containsElement_arguments_element!
+  source:
+    dataConnectorName: functions_connector
+    dataConnectorCommand:
+      procedure: containsElement
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: functionsContainselement
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: containsElement
+  permissions:
+    - role: admin
+      allowExecution: true

@@ -1,0 +1,38 @@
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: duckdb_connector
+  dataConnectorScalarType: String
+  representation: String
+  graphql:
+    comparisonExpressionTypeName: DuckdbDuckdbConnectorStringComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: duckdb_connector
+  dataConnectorScalarType: Boolean
+  representation: Boolean
+  graphql:
+    comparisonExpressionTypeName: DuckdbDuckdbConnectorBooleanComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: duckdb_connector
+  dataConnectorScalarType: Int
+  representation: Int
+  graphql:
+    comparisonExpressionTypeName: DuckdbDuckdbConnectorIntComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: duckdb_connector
+  dataConnectorScalarType: Float
+  representation: Float
+  graphql:
+    comparisonExpressionTypeName: DuckdbDuckdbConnectorFloatComparisonExp

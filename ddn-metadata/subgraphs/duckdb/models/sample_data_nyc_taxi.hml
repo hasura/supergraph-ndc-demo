@@ -1,0 +1,218 @@
+kind: ObjectType
+version: v1
+definition:
+  name: sample_data_nyc_taxi
+  graphql:
+    typeName: duckdbSampleDataNycTaxi
+    inputTypeName: duckdbSampleDataNycTaxiInput
+  fields:
+    - name: VendorID
+      type: Int!
+    - name: tpep_pickup_datetime
+      type: String!
+    - name: tpep_dropoff_datetime
+      type: String!
+    - name: passenger_count
+      type: Float!
+    - name: trip_distance
+      type: Float!
+    - name: RatecodeID
+      type: Float!
+    - name: store_and_fwd_flag
+      type: String!
+    - name: PULocationID
+      type: Int!
+    - name: DOLocationID
+      type: Int!
+    - name: payment_type
+      type: Int!
+    - name: fare_amount
+      type: Float!
+    - name: extra
+      type: Float!
+    - name: mta_tax
+      type: Float!
+    - name: tip_amount
+      type: Float!
+    - name: tolls_amount
+      type: Float!
+    - name: improvement_surcharge
+      type: Float!
+    - name: total_amount
+      type: Float!
+    - name: congestion_surcharge
+      type: Float!
+    - name: airport_fee
+      type: Float!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: sample_data_nyc_taxi
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - VendorID
+          - tpep_pickup_datetime
+          - tpep_dropoff_datetime
+          - passenger_count
+          - trip_distance
+          - RatecodeID
+          - store_and_fwd_flag
+          - PULocationID
+          - DOLocationID
+          - payment_type
+          - fare_amount
+          - extra
+          - mta_tax
+          - tip_amount
+          - tolls_amount
+          - improvement_surcharge
+          - total_amount
+          - congestion_surcharge
+          - airport_fee
+
+---
+kind: Model
+version: v1
+definition:
+  name: sample_data_nyc_taxi
+  objectType: sample_data_nyc_taxi
+  filterableFields:
+    - fieldName: VendorID
+      operators:
+        enableAll: true
+    - fieldName: tpep_pickup_datetime
+      operators:
+        enableAll: true
+    - fieldName: tpep_dropoff_datetime
+      operators:
+        enableAll: true
+    - fieldName: passenger_count
+      operators:
+        enableAll: true
+    - fieldName: trip_distance
+      operators:
+        enableAll: true
+    - fieldName: RatecodeID
+      operators:
+        enableAll: true
+    - fieldName: store_and_fwd_flag
+      operators:
+        enableAll: true
+    - fieldName: PULocationID
+      operators:
+        enableAll: true
+    - fieldName: DOLocationID
+      operators:
+        enableAll: true
+    - fieldName: payment_type
+      operators:
+        enableAll: true
+    - fieldName: fare_amount
+      operators:
+        enableAll: true
+    - fieldName: extra
+      operators:
+        enableAll: true
+    - fieldName: mta_tax
+      operators:
+        enableAll: true
+    - fieldName: tip_amount
+      operators:
+        enableAll: true
+    - fieldName: tolls_amount
+      operators:
+        enableAll: true
+    - fieldName: improvement_surcharge
+      operators:
+        enableAll: true
+    - fieldName: total_amount
+      operators:
+        enableAll: true
+    - fieldName: congestion_surcharge
+      operators:
+        enableAll: true
+    - fieldName: airport_fee
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: VendorID
+      orderByDirections:
+        enableAll: true
+    - fieldName: tpep_pickup_datetime
+      orderByDirections:
+        enableAll: true
+    - fieldName: tpep_dropoff_datetime
+      orderByDirections:
+        enableAll: true
+    - fieldName: passenger_count
+      orderByDirections:
+        enableAll: true
+    - fieldName: trip_distance
+      orderByDirections:
+        enableAll: true
+    - fieldName: RatecodeID
+      orderByDirections:
+        enableAll: true
+    - fieldName: store_and_fwd_flag
+      orderByDirections:
+        enableAll: true
+    - fieldName: PULocationID
+      orderByDirections:
+        enableAll: true
+    - fieldName: DOLocationID
+      orderByDirections:
+        enableAll: true
+    - fieldName: payment_type
+      orderByDirections:
+        enableAll: true
+    - fieldName: fare_amount
+      orderByDirections:
+        enableAll: true
+    - fieldName: extra
+      orderByDirections:
+        enableAll: true
+    - fieldName: mta_tax
+      orderByDirections:
+        enableAll: true
+    - fieldName: tip_amount
+      orderByDirections:
+        enableAll: true
+    - fieldName: tolls_amount
+      orderByDirections:
+        enableAll: true
+    - fieldName: improvement_surcharge
+      orderByDirections:
+        enableAll: true
+    - fieldName: total_amount
+      orderByDirections:
+        enableAll: true
+    - fieldName: congestion_surcharge
+      orderByDirections:
+        enableAll: true
+    - fieldName: airport_fee
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques: []
+    selectMany:
+      queryRootField: duckdbSampleDataNycTaxi
+    filterExpressionType: duckdbSampleDataNycTaxiBoolExp
+    orderByExpressionType: duckdbSampleDataNycTaxiOrderBy
+  source:
+    collection: sample_data_nyc_taxi
+    dataConnectorName: duckdb_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: sample_data_nyc_taxi
+  permissions:
+    - role: admin
+      select:
+        filter: null

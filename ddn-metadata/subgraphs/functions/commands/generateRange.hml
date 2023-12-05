@@ -1,0 +1,26 @@
+kind: Command
+version: v1
+definition:
+  name: generateRange
+  outputType: "[Float!]!"
+  arguments:
+    - name: start
+      type: Float!
+    - name: end
+      type: Float!
+  source:
+    dataConnectorName: functions_connector
+    dataConnectorCommand:
+      procedure: generateRange
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: functionsGeneraterange
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: generateRange
+  permissions:
+    - role: admin
+      allowExecution: true

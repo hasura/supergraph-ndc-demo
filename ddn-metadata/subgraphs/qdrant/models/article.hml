@@ -1,0 +1,127 @@
+kind: ObjectType
+version: v1
+definition:
+  name: article
+  graphql:
+    typeName: qdrantArticle
+    inputTypeName: qdrantArticleInput
+  fields:
+    - name: arr
+      type: "[Int]"
+    - name: bool
+      type: Bool
+    - name: float
+      type: Float
+    - name: int
+      type: Int
+    - name: string
+      type: String
+    - name: id
+      type: Int!
+    - name: score
+      type: Float
+    - name: vector
+      type: "[Float!]"
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: article
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - arr
+          - bool
+          - float
+          - int
+          - string
+          - id
+          - score
+          - vector
+
+---
+kind: Model
+version: v1
+definition:
+  name: article
+  objectType: article
+  filterableFields:
+    - fieldName: arr
+      operators:
+        enableAll: true
+    - fieldName: bool
+      operators:
+        enableAll: true
+    - fieldName: float
+      operators:
+        enableAll: true
+    - fieldName: int
+      operators:
+        enableAll: true
+    - fieldName: string
+      operators:
+        enableAll: true
+    - fieldName: id
+      operators:
+        enableAll: true
+    - fieldName: score
+      operators:
+        enableAll: true
+    - fieldName: vector
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: arr
+      orderByDirections:
+        enableAll: true
+    - fieldName: bool
+      orderByDirections:
+        enableAll: true
+    - fieldName: float
+      orderByDirections:
+        enableAll: true
+    - fieldName: int
+      orderByDirections:
+        enableAll: true
+    - fieldName: string
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: score
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  arguments:
+    - name: search
+      type: _search
+    - name: recommend
+      type: _recommend
+  graphql:
+    selectUniques:
+      - queryRootField: qdrantArticleById
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: qdrantArticle
+    filterExpressionType: qdrantArticleBoolExp
+    orderByExpressionType: qdrantArticleOrderBy
+    argumentsInputType: qdrantArticleArgs
+  source:
+    collection: article
+    dataConnectorName: qdrant_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: article
+  permissions:
+    - role: admin
+      select:
+        filter: null

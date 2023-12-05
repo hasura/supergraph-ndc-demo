@@ -1,0 +1,239 @@
+kind: ObjectType
+version: v1
+definition:
+  name: Employee
+  graphql:
+    typeName: tursoEmployee
+    inputTypeName: tursoEmployeeInput
+  fields:
+    - name: EmployeeId
+      type: Int!
+    - name: LastName
+      type: String!
+    - name: FirstName
+      type: String!
+    - name: Title
+      type: String
+    - name: ReportsTo
+      type: Int
+    - name: BirthDate
+      type: String
+    - name: HireDate
+      type: String
+    - name: Address
+      type: String
+    - name: City
+      type: String
+    - name: State
+      type: String
+    - name: Country
+      type: String
+    - name: PostalCode
+      type: String
+    - name: Phone
+      type: String
+    - name: Fax
+      type: String
+    - name: Email
+      type: String
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Employee
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - EmployeeId
+          - LastName
+          - FirstName
+          - Title
+          - ReportsTo
+          - BirthDate
+          - HireDate
+          - Address
+          - City
+          - State
+          - Country
+          - PostalCode
+          - Phone
+          - Fax
+          - Email
+
+---
+kind: Model
+version: v1
+definition:
+  name: Employee
+  objectType: Employee
+  filterableFields:
+    - fieldName: EmployeeId
+      operators:
+        enableAll: true
+    - fieldName: LastName
+      operators:
+        enableAll: true
+    - fieldName: FirstName
+      operators:
+        enableAll: true
+    - fieldName: Title
+      operators:
+        enableAll: true
+    - fieldName: ReportsTo
+      operators:
+        enableAll: true
+    - fieldName: BirthDate
+      operators:
+        enableAll: true
+    - fieldName: HireDate
+      operators:
+        enableAll: true
+    - fieldName: Address
+      operators:
+        enableAll: true
+    - fieldName: City
+      operators:
+        enableAll: true
+    - fieldName: State
+      operators:
+        enableAll: true
+    - fieldName: Country
+      operators:
+        enableAll: true
+    - fieldName: PostalCode
+      operators:
+        enableAll: true
+    - fieldName: Phone
+      operators:
+        enableAll: true
+    - fieldName: Fax
+      operators:
+        enableAll: true
+    - fieldName: Email
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: EmployeeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: LastName
+      orderByDirections:
+        enableAll: true
+    - fieldName: FirstName
+      orderByDirections:
+        enableAll: true
+    - fieldName: Title
+      orderByDirections:
+        enableAll: true
+    - fieldName: ReportsTo
+      orderByDirections:
+        enableAll: true
+    - fieldName: BirthDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: HireDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: Address
+      orderByDirections:
+        enableAll: true
+    - fieldName: City
+      orderByDirections:
+        enableAll: true
+    - fieldName: State
+      orderByDirections:
+        enableAll: true
+    - fieldName: Country
+      orderByDirections:
+        enableAll: true
+    - fieldName: PostalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: Phone
+      orderByDirections:
+        enableAll: true
+    - fieldName: Fax
+      orderByDirections:
+        enableAll: true
+    - fieldName: Email
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: tursoEmployeeByEmployeeid
+        uniqueIdentifier:
+          - EmployeeId
+    selectMany:
+      queryRootField: tursoEmployee
+    filterExpressionType: tursoEmployeeBoolExp
+    orderByExpressionType: tursoEmployeeOrderBy
+  source:
+    collection: Employee
+    dataConnectorName: turso_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Employee
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Customers
+  source: Employee
+  target:
+    model:
+      relationshipType: Array
+      name: Customer
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: EmployeeId
+      target:
+        modelField:
+          - fieldName: SupportRepId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Employee
+  source: Employee
+  target:
+    model:
+      relationshipType: Object
+      name: Employee
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ReportsTo
+      target:
+        modelField:
+          - fieldName: EmployeeId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Employees
+  source: Employee
+  target:
+    model:
+      relationshipType: Array
+      name: Employee
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: EmployeeId
+      target:
+        modelField:
+          - fieldName: ReportsTo

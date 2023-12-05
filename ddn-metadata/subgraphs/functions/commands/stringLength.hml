@@ -1,0 +1,24 @@
+kind: Command
+version: v1
+definition:
+  name: stringLength
+  outputType: Float!
+  arguments:
+    - name: str
+      type: String!
+  source:
+    dataConnectorName: functions_connector
+    dataConnectorCommand:
+      procedure: stringLength
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: functionsStringlength
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: stringLength
+  permissions:
+    - role: admin
+      allowExecution: true

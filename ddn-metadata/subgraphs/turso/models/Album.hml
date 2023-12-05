@@ -1,0 +1,113 @@
+kind: ObjectType
+version: v1
+definition:
+  name: Album
+  graphql:
+    typeName: tursoAlbum
+    inputTypeName: tursoAlbumInput
+  fields:
+    - name: AlbumId
+      type: Int!
+    - name: Title
+      type: String!
+    - name: ArtistId
+      type: Int!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Album
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - AlbumId
+          - Title
+          - ArtistId
+
+---
+kind: Model
+version: v1
+definition:
+  name: Album
+  objectType: Album
+  filterableFields:
+    - fieldName: AlbumId
+      operators:
+        enableAll: true
+    - fieldName: Title
+      operators:
+        enableAll: true
+    - fieldName: ArtistId
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: AlbumId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Title
+      orderByDirections:
+        enableAll: true
+    - fieldName: ArtistId
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: tursoAlbumByAlbumid
+        uniqueIdentifier:
+          - AlbumId
+    selectMany:
+      queryRootField: tursoAlbum
+    filterExpressionType: tursoAlbumBoolExp
+    orderByExpressionType: tursoAlbumOrderBy
+  source:
+    collection: Album
+    dataConnectorName: turso_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Album
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Artist
+  source: Album
+  target:
+    model:
+      relationshipType: Object
+      name: Artist
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ArtistId
+      target:
+        modelField:
+          - fieldName: ArtistId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Tracks
+  source: Album
+  target:
+    model:
+      relationshipType: Array
+      name: Track
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: AlbumId
+      target:
+        modelField:
+          - fieldName: AlbumId

@@ -1,0 +1,167 @@
+kind: ObjectType
+version: v1
+definition:
+  name: Invoice
+  graphql:
+    typeName: tursoInvoice
+    inputTypeName: tursoInvoiceInput
+  fields:
+    - name: InvoiceId
+      type: Int!
+    - name: CustomerId
+      type: Int!
+    - name: InvoiceDate
+      type: String!
+    - name: BillingAddress
+      type: String
+    - name: BillingCity
+      type: String
+    - name: BillingState
+      type: String
+    - name: BillingCountry
+      type: String
+    - name: BillingPostalCode
+      type: String
+    - name: Total
+      type: Float!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Invoice
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - InvoiceId
+          - CustomerId
+          - InvoiceDate
+          - BillingAddress
+          - BillingCity
+          - BillingState
+          - BillingCountry
+          - BillingPostalCode
+          - Total
+
+---
+kind: Model
+version: v1
+definition:
+  name: Invoice
+  objectType: Invoice
+  filterableFields:
+    - fieldName: InvoiceId
+      operators:
+        enableAll: true
+    - fieldName: CustomerId
+      operators:
+        enableAll: true
+    - fieldName: InvoiceDate
+      operators:
+        enableAll: true
+    - fieldName: BillingAddress
+      operators:
+        enableAll: true
+    - fieldName: BillingCity
+      operators:
+        enableAll: true
+    - fieldName: BillingState
+      operators:
+        enableAll: true
+    - fieldName: BillingCountry
+      operators:
+        enableAll: true
+    - fieldName: BillingPostalCode
+      operators:
+        enableAll: true
+    - fieldName: Total
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: InvoiceId
+      orderByDirections:
+        enableAll: true
+    - fieldName: CustomerId
+      orderByDirections:
+        enableAll: true
+    - fieldName: InvoiceDate
+      orderByDirections:
+        enableAll: true
+    - fieldName: BillingAddress
+      orderByDirections:
+        enableAll: true
+    - fieldName: BillingCity
+      orderByDirections:
+        enableAll: true
+    - fieldName: BillingState
+      orderByDirections:
+        enableAll: true
+    - fieldName: BillingCountry
+      orderByDirections:
+        enableAll: true
+    - fieldName: BillingPostalCode
+      orderByDirections:
+        enableAll: true
+    - fieldName: Total
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: tursoInvoiceByInvoiceid
+        uniqueIdentifier:
+          - InvoiceId
+    selectMany:
+      queryRootField: tursoInvoice
+    filterExpressionType: tursoInvoiceBoolExp
+    orderByExpressionType: tursoInvoiceOrderBy
+  source:
+    collection: Invoice
+    dataConnectorName: turso_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Invoice
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Customer
+  source: Invoice
+  target:
+    model:
+      relationshipType: Object
+      name: Customer
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: CustomerId
+      target:
+        modelField:
+          - fieldName: CustomerId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: InvoiceLines
+  source: Invoice
+  target:
+    model:
+      relationshipType: Array
+      name: InvoiceLine
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: InvoiceId
+      target:
+        modelField:
+          - fieldName: InvoiceId

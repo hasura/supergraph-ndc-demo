@@ -1,0 +1,26 @@
+kind: Command
+version: v1
+definition:
+  name: addNumbers
+  outputType: Float!
+  arguments:
+    - name: a
+      type: Float!
+    - name: b
+      type: Float!
+  source:
+    dataConnectorName: functions_connector
+    dataConnectorCommand:
+      procedure: addNumbers
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: functionsAddnumbers
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: addNumbers
+  permissions:
+    - role: admin
+      allowExecution: true

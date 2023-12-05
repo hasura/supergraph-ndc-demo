@@ -1,0 +1,63 @@
+version: '0.1'
+
+services:
+  auth:
+    ports:
+      - "3050:3050"
+    build: ./auth
+  engine:
+    build:
+      context: ./engine
+      dockerfile: Dockerfile
+      args:
+        GITHUB_PAT: ${GITHUB_PAT}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ${ENGINE_METADATA_PATH}:/engine_metadata.json
+      - ${ENGINE_AUTH_PATH}:/auth_config.json
+    environment:
+      - HASURA_GRAPHQL_CORS_DOMAIN=http://localhost:3000
+    command: ["cargo", "run", "--release", "--bin", "engine", "--", "--port", "8000", "--metadata-path", "/engine_metadata.json", "--authn-config-path", "/auth_config.json"]
+    restart: always
+    depends_on:
+      - auth
+  turso:
+    build: ./connector-turso
+    ports:
+      - "8101:8101"
+    volumes:
+      - ${TURSO_METADATA}:/etc/connector/config.json
+      - ${TURSO_DATABASE}:/usr/src/app/database.sqlite
+
+  qdrant_database:
+    image: qdrant/qdrant
+    ports:
+      - "6333:6333"
+    restart: always
+
+  snapshot-uploader:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+    volumes:
+      - snapshot-data:/app/snapshots
+    depends_on:
+      - qdrant_database
+
+  qdrant:
+    build: ./connector-qdrant
+    ports:
+      - "8102:8102"
+    volumes:
+      - ${QDRANT_METADATA}:/etc/connector/config.json
+
+  functions:
+    image: ghcr.io/hasura/ndc-typescript-deno:latest
+    volumes:
+      - ${FUNCTIONS_SRC}:/functions/src
+    ports:
+      - "8080:8080"
+
+volumes:
+  snapshot-data:

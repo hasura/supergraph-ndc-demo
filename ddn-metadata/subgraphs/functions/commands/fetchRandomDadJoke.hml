@@ -1,0 +1,22 @@
+kind: Command
+version: v1
+definition:
+  name: fetchRandomDadJoke
+  outputType: fetchRandomDadJoke_output!
+  arguments: []
+  source:
+    dataConnectorName: functions_connector
+    dataConnectorCommand:
+      procedure: fetchRandomDadJoke
+  graphql:
+    rootFieldKind: Mutation
+    rootFieldName: functionsFetchrandomdadjoke
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: fetchRandomDadJoke
+  permissions:
+    - role: admin
+      allowExecution: true
