@@ -1,0 +1,221 @@
+kind: ObjectType
+version: v1
+definition:
+  name: Track
+  graphql:
+    typeName: track
+    inputTypeName: trackInput
+  fields:
+    - name: AlbumId
+      type: int4
+    - name: Bytes
+      type: int4
+    - name: Composer
+      type: varchar
+    - name: GenreId
+      type: int4
+    - name: MediaTypeId
+      type: int4!
+    - name: Milliseconds
+      type: int4!
+    - name: Name
+      type: varchar!
+    - name: TrackId
+      type: int4!
+    - name: UnitPrice
+      type: numeric!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Track
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - AlbumId
+          - Bytes
+          - Composer
+          - GenreId
+          - MediaTypeId
+          - Milliseconds
+          - Name
+          - TrackId
+          - UnitPrice
+
+---
+kind: Model
+version: v1
+definition:
+  name: Track
+  objectType: Track
+  filterableFields:
+    - fieldName: AlbumId
+      operators:
+        enableAll: true
+    - fieldName: Bytes
+      operators:
+        enableAll: true
+    - fieldName: Composer
+      operators:
+        enableAll: true
+    - fieldName: GenreId
+      operators:
+        enableAll: true
+    - fieldName: MediaTypeId
+      operators:
+        enableAll: true
+    - fieldName: Milliseconds
+      operators:
+        enableAll: true
+    - fieldName: Name
+      operators:
+        enableAll: true
+    - fieldName: TrackId
+      operators:
+        enableAll: true
+    - fieldName: UnitPrice
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: AlbumId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Bytes
+      orderByDirections:
+        enableAll: true
+    - fieldName: Composer
+      orderByDirections:
+        enableAll: true
+    - fieldName: GenreId
+      orderByDirections:
+        enableAll: true
+    - fieldName: MediaTypeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Milliseconds
+      orderByDirections:
+        enableAll: true
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+    - fieldName: TrackId
+      orderByDirections:
+        enableAll: true
+    - fieldName: UnitPrice
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: trackByTrackid
+        uniqueIdentifier:
+          - TrackId
+    selectMany:
+      queryRootField: track
+    filterExpressionType: trackBoolExp
+    orderByExpressionType: trackOrderBy
+  source:
+    collection: Track
+    dataConnectorName: postgres_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Track
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: InvoiceLines
+  source: Track
+  target:
+    model:
+      relationshipType: Array
+      name: InvoiceLine
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: TrackId
+      target:
+        modelField:
+          - fieldName: TrackId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: PlaylistTracks
+  source: Track
+  target:
+    model:
+      relationshipType: Array
+      name: PlaylistTrack
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: TrackId
+      target:
+        modelField:
+          - fieldName: TrackId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Album
+  source: Track
+  target:
+    model:
+      relationshipType: Object
+      name: Album
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: AlbumId
+      target:
+        modelField:
+          - fieldName: AlbumId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Genre
+  source: Track
+  target:
+    model:
+      relationshipType: Object
+      name: Genre
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: GenreId
+      target:
+        modelField:
+          - fieldName: GenreId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: MediaType
+  source: Track
+  target:
+    model:
+      relationshipType: Object
+      name: MediaType
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: MediaTypeId
+      target:
+        modelField:
+          - fieldName: MediaTypeId

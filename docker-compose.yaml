@@ -1,10 +1,13 @@
 version: '0.1'
 
 services:
+  
   auth:
     ports:
       - "3050:3050"
     build: ./auth
+    restart: always
+  
   engine:
     build:
       context: ./engine
@@ -22,6 +25,7 @@ services:
     restart: always
     depends_on:
       - auth
+  
   turso:
     build: ./connector-turso
     ports:
@@ -29,13 +33,13 @@ services:
     volumes:
       - ${TURSO_METADATA}:/etc/connector/config.json
       - ${TURSO_DATABASE}:/usr/src/app/database.sqlite
-
+  
   qdrant_database:
     image: qdrant/qdrant
     ports:
       - "6333:6333"
     restart: always
-
+  
   snapshot-uploader:
     build:
       context: ./worker
@@ -44,13 +48,14 @@ services:
       - snapshot-data:/app/snapshots
     depends_on:
       - qdrant_database
-
+  
   qdrant:
     build: ./connector-qdrant
     ports:
       - "8102:8102"
     volumes:
       - ${QDRANT_METADATA}:/etc/connector/config.json
+    restart: always
 
   functions:
     image: ghcr.io/hasura/ndc-typescript-deno:latest
@@ -58,6 +63,38 @@ services:
       - ${FUNCTIONS_SRC}:/functions/src
     ports:
       - "8080:8080"
+    restart: always
+
+  postgres_database:
+    build:
+      context: ./pgturso
+      args:
+        OS: ${ZIG_OS}
+        ARCH: ${ZIG_ARCH}
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ${POSTGRESQL_CONF}:/postgresql.conf
+      # - ${TURSO_IMPORT_CREDENTIALS}:/docker-entrypoint-initdb.d/00-setup.sql # 
+      - ${POSTGRES_CREATE}:/docker-entrypoint-initdb.d/01-setup.sql
+      # - ${TURSO_SCHEDULE_REPLICATION}:/docker-entrypoint-initdb.d/02-setup.sql
+      - ${POSTGRES_INSERT}:/docker-entrypoint-initdb.d/03-setup.sql
+    restart: always
+
+  postgres:
+    build:
+      context: ./connector-postgres
+      dockerfile: Dockerfile
+    command: ["cargo", "run", "--bin", "ndc-postgres", "--release", "--", "serve", "--configuration", "deployment.json", "--port", "8100"]
+    ports:
+      - 8100:8100
+    volumes:
+      - ${POSTGRES_METADATA}:/app/deployment.json
 
 volumes:
+  postgres_data:
   snapshot-data:

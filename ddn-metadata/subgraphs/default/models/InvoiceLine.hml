@@ -1,0 +1,131 @@
+kind: ObjectType
+version: v1
+definition:
+  name: InvoiceLine
+  graphql:
+    typeName: invoiceLine
+    inputTypeName: invoiceLineInput
+  fields:
+    - name: InvoiceId
+      type: int4!
+    - name: InvoiceLineId
+      type: int4!
+    - name: Quantity
+      type: int4!
+    - name: TrackId
+      type: int4!
+    - name: UnitPrice
+      type: numeric!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InvoiceLine
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - InvoiceId
+          - InvoiceLineId
+          - Quantity
+          - TrackId
+          - UnitPrice
+
+---
+kind: Model
+version: v1
+definition:
+  name: InvoiceLine
+  objectType: InvoiceLine
+  filterableFields:
+    - fieldName: InvoiceId
+      operators:
+        enableAll: true
+    - fieldName: InvoiceLineId
+      operators:
+        enableAll: true
+    - fieldName: Quantity
+      operators:
+        enableAll: true
+    - fieldName: TrackId
+      operators:
+        enableAll: true
+    - fieldName: UnitPrice
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: InvoiceId
+      orderByDirections:
+        enableAll: true
+    - fieldName: InvoiceLineId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Quantity
+      orderByDirections:
+        enableAll: true
+    - fieldName: TrackId
+      orderByDirections:
+        enableAll: true
+    - fieldName: UnitPrice
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: invoiceLineByInvoicelineid
+        uniqueIdentifier:
+          - InvoiceLineId
+    selectMany:
+      queryRootField: invoiceLine
+    filterExpressionType: invoiceLineBoolExp
+    orderByExpressionType: invoiceLineOrderBy
+  source:
+    collection: InvoiceLine
+    dataConnectorName: postgres_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: InvoiceLine
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Invoice
+  source: InvoiceLine
+  target:
+    model:
+      relationshipType: Object
+      name: Invoice
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: InvoiceId
+      target:
+        modelField:
+          - fieldName: InvoiceId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Track
+  source: InvoiceLine
+  target:
+    model:
+      relationshipType: Object
+      name: Track
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: TrackId
+      target:
+        modelField:
+          - fieldName: TrackId

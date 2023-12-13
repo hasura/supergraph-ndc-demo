@@ -1,0 +1,86 @@
+kind: ObjectType
+version: v1
+definition:
+  name: MediaType
+  graphql:
+    typeName: mediaType
+    inputTypeName: mediaTypeInput
+  fields:
+    - name: MediaTypeId
+      type: int4!
+    - name: Name
+      type: varchar
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: MediaType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - MediaTypeId
+          - Name
+
+---
+kind: Model
+version: v1
+definition:
+  name: MediaType
+  objectType: MediaType
+  filterableFields:
+    - fieldName: MediaTypeId
+      operators:
+        enableAll: true
+    - fieldName: Name
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: MediaTypeId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Name
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: mediaTypeByMediatypeid
+        uniqueIdentifier:
+          - MediaTypeId
+    selectMany:
+      queryRootField: mediaType
+    filterExpressionType: mediaTypeBoolExp
+    orderByExpressionType: mediaTypeOrderBy
+  source:
+    collection: MediaType
+    dataConnectorName: postgres_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: MediaType
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: Tracks
+  source: MediaType
+  target:
+    model:
+      relationshipType: Array
+      name: Track
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: MediaTypeId
+      target:
+        modelField:
+          - fieldName: MediaTypeId

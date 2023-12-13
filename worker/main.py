@@ -5,7 +5,8 @@ import time
 
 # Change these to point to your own S3 bucket containing snapshots.
 # This points to a public S3 bucket that contains uploads of Qdrant Snapshots that can be generated in the Qdrant Dashboard.
-URL_PATTERN = "https://eu-west-hasura.s3.eu-west-3.amazonaws.com/{collection_name}.snapshot"
+# URL_PATTERN = "https://eu-west-hasura.s3.eu-west-3.amazonaws.com/{collection_name}.snapshot"
+URL_PATTERN = "https://us-east-hasura.s3.us-east-2.amazonaws.com/{collection_name}.snapshot"
 # List of collections to process
 COLLECTIONS = ["Album", "article", "boolean", "image_recipe", "multimodal_recipe", "text_recipe"]
 

@@ -1,6 +1,6 @@
 It would be nice to be able to run console locally.
 
-I'm not sure what the journey is for something like this, but if I remember correctly, v2 had a console that you could run yourself. Is GraphiQL the extent of v3 console functionality?
+I'm not sure what the journey is for something like this, but if I remember correctly, v2 had a console that you could run yourself. Is GraphiQL the extent of v3 console functionality? In terms of OSS, what is available for someone to self-host 
 
 AFAIK console needs the control plane, which means you need LUX for it? I'm not entirely clear on this.
 

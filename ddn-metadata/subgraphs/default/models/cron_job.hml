@@ -1,0 +1,135 @@
+kind: ObjectType
+version: v1
+definition:
+  name: cron_job
+  graphql:
+    typeName: cronJob
+    inputTypeName: cronJobInput
+  fields:
+    - name: active
+      type: bool!
+    - name: command
+      type: text!
+    - name: database
+      type: text!
+    - name: jobid
+      type: int8!
+    - name: jobname
+      type: text
+    - name: nodename
+      type: text!
+    - name: nodeport
+      type: int4!
+    - name: schedule
+      type: text!
+    - name: username
+      type: text!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: cron_job
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - active
+          - command
+          - database
+          - jobid
+          - jobname
+          - nodename
+          - nodeport
+          - schedule
+          - username
+
+---
+kind: Model
+version: v1
+definition:
+  name: cron_job
+  objectType: cron_job
+  filterableFields:
+    - fieldName: active
+      operators:
+        enableAll: true
+    - fieldName: command
+      operators:
+        enableAll: true
+    - fieldName: database
+      operators:
+        enableAll: true
+    - fieldName: jobid
+      operators:
+        enableAll: true
+    - fieldName: jobname
+      operators:
+        enableAll: true
+    - fieldName: nodename
+      operators:
+        enableAll: true
+    - fieldName: nodeport
+      operators:
+        enableAll: true
+    - fieldName: schedule
+      operators:
+        enableAll: true
+    - fieldName: username
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: active
+      orderByDirections:
+        enableAll: true
+    - fieldName: command
+      orderByDirections:
+        enableAll: true
+    - fieldName: database
+      orderByDirections:
+        enableAll: true
+    - fieldName: jobid
+      orderByDirections:
+        enableAll: true
+    - fieldName: jobname
+      orderByDirections:
+        enableAll: true
+    - fieldName: nodename
+      orderByDirections:
+        enableAll: true
+    - fieldName: nodeport
+      orderByDirections:
+        enableAll: true
+    - fieldName: schedule
+      orderByDirections:
+        enableAll: true
+    - fieldName: username
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: cronJobByJobid
+        uniqueIdentifier:
+          - jobid
+      - queryRootField: jobnameUsernameUniq
+        uniqueIdentifier:
+          - jobname
+          - username
+    selectMany:
+      queryRootField: cronJob
+    filterExpressionType: cronJobBoolExp
+    orderByExpressionType: cronJobOrderBy
+  source:
+    collection: cron_job
+    dataConnectorName: postgres_connector
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: cron_job
+  permissions:
+    - role: admin
+      select:
+        filter: null

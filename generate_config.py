@@ -8,6 +8,24 @@ SUBGRAPH_DOCKERS = {
     "functions": "http://functions:8080"
 }
 
+EXCLUDED_SUBGRAPHS = []
+
+class CustomLoader(yaml.SafeLoader):
+    """
+    Custom YAML loader that treats '=' as a string.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super(CustomLoader, self).__init__(*args, **kwargs)
+
+        # Add constructor for handling '='
+        self.add_constructor(u'tag:yaml.org,2002:value', type(self).construct_yaml_str)
+
+    def construct_yaml_str(self, node):
+        return self.construct_scalar(node)
+
+yaml.SafeLoader = CustomLoader
+
 def load_yaml_files(directory):
     subgraph_data = {}
 
@@ -29,7 +47,8 @@ def load_yaml_files(directory):
                                     if subgraph in SUBGRAPH_DOCKERS:
                                         item["definition"]["url"]["singleUrl"] = SUBGRAPH_DOCKERS[subgraph]
                                 yaml_items.append(item)
-                            subgraph_data[subgraph].extend(yaml_items)
+                            if subgraph not in EXCLUDED_SUBGRAPHS:
+                                subgraph_data[subgraph].extend(yaml_items)
                         except yaml.YAMLError as exc:
                             print(f"Error loading YAML from {path}: {exc}")
 
