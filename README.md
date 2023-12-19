@@ -6,6 +6,8 @@ Fill out the .env with your details using .env.example as a template
 
 Run `docker compose up`
 
+Please be patient the first time you start things up! 🙏 
+
 Navigate to `http://localhost:8000/` for GraphiQL via V3 engine
 
 # Cloud Access

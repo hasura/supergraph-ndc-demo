@@ -1047,25 +1047,5 @@ definition:
             column_mapping:
               MediaTypeId: MediaTypeId
             foreign_collection: MediaType
-      - name: cron_job
-        arguments: {}
-        type: cron_job
-        uniqueness_constraints:
-          job_pkey:
-            unique_columns:
-              - jobid
-          jobname_username_uniq:
-            unique_columns:
-              - jobname
-              - username
-        foreign_keys: {}
-      - name: cron_job_run_details
-        arguments: {}
-        type: cron_job_run_details
-        uniqueness_constraints:
-          job_run_details_pkey:
-            unique_columns:
-              - runid
-        foreign_keys: {}
     functions: []
     procedures: []

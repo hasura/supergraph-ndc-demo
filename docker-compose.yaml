@@ -12,8 +12,6 @@ services:
     build:
       context: ./engine
       dockerfile: Dockerfile
-      args:
-        GITHUB_PAT: ${GITHUB_PAT}
     ports:
       - "8000:8000"
     volumes:
