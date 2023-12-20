@@ -63,12 +63,28 @@ services:
       - "8080:8080"
     restart: always
 
+  # postgres_database: # pg_turso extension preloaded, this is flaky.
+  #   build:
+  #     context: ./pgturso
+  #     args:
+  #       OS: ${ZIG_OS}
+  #       ARCH: ${ZIG_ARCH}
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #     - ${POSTGRESQL_CONF}:/postgresql.conf
+  #     # - ${TURSO_IMPORT_CREDENTIALS}:/docker-entrypoint-initdb.d/00-setup.sql # 
+  #     - ${POSTGRES_CREATE}:/docker-entrypoint-initdb.d/01-setup.sql
+  #     # - ${TURSO_SCHEDULE_REPLICATION}:/docker-entrypoint-initdb.d/02-setup.sql
+  #     - ${POSTGRES_INSERT}:/docker-entrypoint-initdb.d/03-setup.sql
+  #   restart: always
+
   postgres_database:
-    build:
-      context: ./pgturso
-      args:
-        OS: ${ZIG_OS}
-        ARCH: ${ZIG_ARCH}
+    image: postgres:latest
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -76,12 +92,10 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ${POSTGRESQL_CONF}:/postgresql.conf
-      # - ${TURSO_IMPORT_CREDENTIALS}:/docker-entrypoint-initdb.d/00-setup.sql # 
       - ${POSTGRES_CREATE}:/docker-entrypoint-initdb.d/01-setup.sql
-      # - ${TURSO_SCHEDULE_REPLICATION}:/docker-entrypoint-initdb.d/02-setup.sql
       - ${POSTGRES_INSERT}:/docker-entrypoint-initdb.d/03-setup.sql
     restart: always
+
 
   postgres:
     build:
