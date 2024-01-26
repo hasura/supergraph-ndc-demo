@@ -1,14 +1,17 @@
 # Local Installation
-Clone this
+Clone this.
 
 Fill out the .env with your details using .env.example as a template
 (You should only need to provide a github PAT for defaults)
+(Getting rid of github PAT muhuhahaha LGTM! 🚀)
 
 Run `docker compose up`
 
 Please be patient the first time you start things up! 🙏 
 
 Navigate to `http://localhost:8000/` for GraphiQL via V3 engine
+
+Please keep in mind, this is in Alpha!
 
 # Cloud Access
 

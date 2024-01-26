@@ -17,6 +17,7 @@ app.post('/validate-request', (req, res) => {
     }
     if (response["x-hasura-role"] === undefined){
         // Validate all requests as admin for dev
+        // please don't do this in production. this is like the opposite of secure.
         response["x-hasura-role"] = "admin";
     }
     console.log(response);

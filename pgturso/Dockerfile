@@ -33,6 +33,7 @@ RUN git clone https://github.com/citusdata/pg_cron.git && \
 RUN mkdir -p /zig
 
 # Conditional logic to handle different file formats and download URLs
+# Windows is broken here but I don't have the proper machine.
 RUN if [ "$OS" = "windows" ]; then \
         ZIG_URL="${ZIG_BASE_URL}/zig-windows-${ARCH}-${ZIG_VERSION}.zip" && \
         curl -L ${ZIG_URL} -o zig.zip && \

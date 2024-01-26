@@ -9,10 +9,27 @@ services:
     build: ./auth
     restart: always
   
+  postgres_database:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ${POSTGRES_CREATE}:/docker-entrypoint-initdb.d/01-setup.sql
+      - ${POSTGRES_INSERT}:/docker-entrypoint-initdb.d/03-setup.sql
+    restart: always
+    ports:
+      - "5432:5432"
+
+  qdrant_database:
+    image: qdrant/qdrant
+    ports:
+      - "6333:6333"
+    restart: always
+
   engine:
-    build:
-      context: ./engine
-      dockerfile: Dockerfile
+    image: us-central1-docker.pkg.dev/websitecloud-352908/v3-engine/v3-engine:1-alpha
     ports:
       - "8000:8000"
     volumes:
@@ -20,24 +37,27 @@ services:
       - ${ENGINE_AUTH_PATH}:/auth_config.json
     environment:
       - HASURA_GRAPHQL_CORS_DOMAIN=http://localhost:3000
-    command: ["cargo", "run", "--release", "--bin", "engine", "--", "--port", "8000", "--metadata-path", "/engine_metadata.json", "--authn-config-path", "/auth_config.json"]
+    command: ["--port", "8000", "--metadata-path", "/engine_metadata.json", "--authn-config-path", "/auth_config.json"]
     restart: always
     depends_on:
       - auth
-  
+
+
+  postgres:
+    image: us-docker.pkg.dev/hasura-ddn/ddn/ndc-postgres:${CONNECTOR_TAG:-dev-main}
+    command: ["serve", "--configuration", "/deployment.json", "--port", "8100"]
+    ports:
+      - 8100:8100
+    volumes:
+      - ${POSTGRES_METADATA}:/deployment.json
+
   turso:
-    build: ./connector-turso
+    image: us-central1-docker.pkg.dev/websitecloud-352908/ndc-turso/ndc-turso:4-alpha
     ports:
       - "8101:8101"
     volumes:
       - ${TURSO_METADATA}:/etc/connector/config.json
       - ${TURSO_DATABASE}:/usr/src/app/database.sqlite
-  
-  qdrant_database:
-    image: qdrant/qdrant
-    ports:
-      - "6333:6333"
-    restart: always
   
   snapshot-uploader:
     build:
@@ -49,7 +69,7 @@ services:
       - qdrant_database
   
   qdrant:
-    build: ./connector-qdrant
+    image: us-central1-docker.pkg.dev/websitecloud-352908/ndc-qdrant/ndc-qdrant:0-alpha
     ports:
       - "8102:8102"
     volumes:
@@ -65,6 +85,7 @@ services:
     restart: always
 
   # postgres_database: # pg_turso extension preloaded, this is flaky.
+  # TODO: Fix me, so we can replicate data from Postgres into SQLite for edge/local caching!
   #   build:
   #     context: ./pgturso
   #     args:
@@ -83,30 +104,6 @@ services:
   #     # - ${TURSO_SCHEDULE_REPLICATION}:/docker-entrypoint-initdb.d/02-setup.sql
   #     - ${POSTGRES_INSERT}:/docker-entrypoint-initdb.d/03-setup.sql
   #   restart: always
-
-  postgres_database:
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ${POSTGRES_CREATE}:/docker-entrypoint-initdb.d/01-setup.sql
-      - ${POSTGRES_INSERT}:/docker-entrypoint-initdb.d/03-setup.sql
-    restart: always
-
-
-  postgres:
-    build:
-      context: ./connector-postgres
-      dockerfile: Dockerfile
-    command: ["cargo", "run", "--bin", "ndc-postgres", "--release", "--", "serve", "--configuration", "deployment.json", "--port", "8100"]
-    ports:
-      - 8100:8100
-    volumes:
-      - ${POSTGRES_METADATA}:/app/deployment.json
 
 volumes:
   postgres_data:
